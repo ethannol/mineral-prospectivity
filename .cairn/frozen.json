@@ -1,0 +1,12 @@
+{
+  "frozen_at": "2026-10-09T21:40:44+00:00",
+  "git_head": "707423380a2a5582370f3940747eb592fe0609df",
+  "files": {
+    "docs/prereg.md": "760467301ba1a979ebc5d7c6be096f8941715832b7ca6d5a678334398142e7bf",
+    "data/raw/manifest.json": "f344487da7898f79f993ef512e9b234c9ce563a699d2f19ba532aeaf173d5b12",
+    "data/raw/mrds.met": "1848b57dd33d6f8cd3d2235b4c31e25e11d69a025cce6c95d5e963ff004f187a",
+    "data/raw/mrds_nv.csv": "1d83773132f0b867823cb3ada2911dfc23fc846b4e795094d526bf792bbf3f7f",
+    "data/raw/nure_nv_sediment.csv": "6fe27c3c557bdeb9bdc5af6e9fc84028668513bd2256cde6b9f4e30d6da78f80",
+    "data/raw/nurehssr.met": "7b32cc10dcb951d42bca96104378549a3b1a111c7c77576f341a778ecc2ae8d7"
+  }
+}
