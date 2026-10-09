@@ -1,0 +1,16 @@
+HTTP/2 200 
+date: Fri, 09 Oct 2026 21:27:16 GMT
+content-type: application/zip
+content-length: 25791223
+accept-ranges: bytes
+access-control-allow-origin: *
+etag: "1898af7-5e6eefd78cbfe"
+last-modified: Tue, 23 Aug 2022 21:10:12 GMT
+p3p: CP="NON DSP LAW CUR ADMa DEVa STP OUR STA UNI COM NAV INT", policyref="/w3c/p3p.xml"
+server: cloudflare
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+set-cookie: __cf_bm=TCfy1ZH6F9aE59csAKIOJvMSc0JkLatWA5Fyb.6ThCk-1791581236.0453558-1.0.1.1-z30aHpjU8uZ9JBgYPA7aONCl.eX.puTfum8OMmKpcGUPtWWmjdPY4dkJg25yEsYTPYbnVI5MbkgsIdkO_Tx7OACdIfTyOzYSfi4KGWDvgtgmXR9_RzsRSUj7baBo6mjJ; HttpOnly; SameSite=None; Secure; Path=/; Domain=usgs.gov; Expires=Fri, 09 Oct 2026 21:57:16 GMT
+x-content-type-options: nosniff
+cf-cache-status: BYPASS
+cf-ray: a48077e549a3cd6e-SJC
+

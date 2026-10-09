@@ -1,0 +1,764 @@
+{
+  "name": "mrds_nv",
+  "source": "data/raw/mrds_nv.csv",
+  "sha256": "1d83773132f0b867823cb3ada2911dfc23fc846b4e795094d526bf792bbf3f7f",
+  "rows": 15408,
+  "columns": 46,
+  "duplicate_rows": 0,
+  "candidate_keys": [
+    [
+      "dep_id"
+    ],
+    [
+      "url"
+    ]
+  ],
+  "fields": {
+    "dep_id": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 15408,
+      "unique_rate": 1.0,
+      "numeric": {
+        "min": 10008111.0,
+        "p05": 10037713.35,
+        "median": 10149642.5,
+        "p95": 10295556.65,
+        "max": 60001708.0,
+        "mean": 10317998.111954829,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "url": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 15408,
+      "unique_rate": 1.0,
+      "top_values": {
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10037553": 1,
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10037726": 1,
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10042519": 1,
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10045935": 1,
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10046062": 1,
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10046499": 1,
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10125158": 1,
+        "https://mrdata.usgs.gov/mrds/show-mrds.php?dep_id=10197379": 1
+      }
+    },
+    "mrds_id": {
+      "dtype": "str",
+      "null_count": 7457,
+      "null_rate": 0.483969,
+      "n_unique": 6430,
+      "unique_rate": 0.808703,
+      "top_values": {
+        "M032077": 5,
+        "W002900": 5,
+        "M060274": 4,
+        "M060371": 4,
+        "W002496": 4,
+        "W016386": 4,
+        "D001198": 3,
+        "D001205": 3
+      }
+    },
+    "mas_id": {
+      "dtype": "float64",
+      "null_count": 6368,
+      "null_rate": 0.413292,
+      "n_unique": 9026,
+      "unique_rate": 0.998451,
+      "numeric": {
+        "min": 300231070.0,
+        "p05": 320019001.95,
+        "median": 320150738.5,
+        "p95": 320330090.05,
+        "max": 325100064.0,
+        "mean": 320192509.932854,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "site_name": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 11420,
+      "unique_rate": 0.741173,
+      "top_values": {
+        "Unnamed Prospect": 209,
+        "Unknown Prospect": 90,
+        "Unnamed Shaft": 60,
+        "Unnamed Mine": 51,
+        "Silver Occurrence": 46,
+        "Unknown Name": 34,
+        "Unknown Prospects": 30,
+        "Gold Occurrence": 27
+      }
+    },
+    "latitude": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 12673,
+      "unique_rate": 0.822495,
+      "numeric": {
+        "min": 35.12612,
+        "p05": 36.472845,
+        "median": 39.307005000000004,
+        "p95": 41.68271,
+        "max": 41.98488,
+        "mean": 39.30235237214434,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "longitude": {
+      "dtype": "float64",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 13016,
+      "unique_rate": 0.844756,
+      "numeric": {
+        "min": -119.99963,
+        "p05": -119.5378215,
+        "median": -117.24733,
+        "p95": -114.4397235,
+        "max": -114.04364,
+        "mean": -117.1273698409917,
+        "zeros": 0,
+        "negatives": 15408
+      }
+    },
+    "region": {
+      "dtype": "float64",
+      "null_count": 15408,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "country": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 1,
+      "unique_rate": 6.5e-05,
+      "top_values": {
+        "United States": 15408
+      }
+    },
+    "state": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 1,
+      "unique_rate": 6.5e-05,
+      "top_values": {
+        "Nevada": 15408
+      }
+    },
+    "county": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 25,
+      "unique_rate": 0.001623,
+      "top_values": {
+        "Nye": 2042,
+        "Elko": 1659,
+        "Pershing": 1629,
+        "Esmeralda": 1365,
+        "Humboldt": 1215,
+        "Lander": 1138,
+        "Mineral": 1115,
+        "Lincoln": 840
+      }
+    },
+    "com_type": {
+      "dtype": "str",
+      "null_count": 139,
+      "null_rate": 0.009021,
+      "n_unique": 3,
+      "unique_rate": 0.000196,
+      "top_values": {
+        "M": 12347,
+        "N": 2166,
+        "B": 756
+      }
+    },
+    "commod1": {
+      "dtype": "str",
+      "null_count": 669,
+      "null_rate": 0.043419,
+      "n_unique": 486,
+      "unique_rate": 0.032974,
+      "top_values": {
+        "Gold": 4180,
+        "Silver": 1450,
+        "Copper": 947,
+        "Tungsten": 897,
+        "Gold, Silver": 630,
+        "Mercury": 573,
+        "Lead": 514,
+        "Uranium": 492
+      }
+    },
+    "commod2": {
+      "dtype": "str",
+      "null_count": 13573,
+      "null_rate": 0.880906,
+      "n_unique": 299,
+      "unique_rate": 0.162943,
+      "top_values": {
+        "Silver": 450,
+        "Gold": 212,
+        "Copper": 107,
+        "Lead": 75,
+        "Gold, Silver": 58,
+        "Copper, Lead": 52,
+        "Lead, Copper": 45,
+        "Silver, Gold": 38
+      }
+    },
+    "commod3": {
+      "dtype": "str",
+      "null_count": 9176,
+      "null_rate": 0.595535,
+      "n_unique": 1314,
+      "unique_rate": 0.210847,
+      "top_values": {
+        "Silver": 1338,
+        "Gold": 408,
+        "Copper": 198,
+        "Silver, Gold": 140,
+        "Gold, Silver": 114,
+        "Lead": 107,
+        "Mercury": 105,
+        "Iron": 99
+      }
+    },
+    "oper_type": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 11,
+      "unique_rate": 0.000714,
+      "top_values": {
+        "Unknown": 7734,
+        "Surface": 2994,
+        "Underground": 2937,
+        "Surface-Underground": 1209,
+        "Processing Plant": 211,
+        "Placer": 196,
+        "Geothermal": 52,
+        "Well": 51
+      }
+    },
+    "dep_type": {
+      "dtype": "str",
+      "null_count": 12802,
+      "null_rate": 0.830867,
+      "n_unique": 235,
+      "unique_rate": 0.090177,
+      "top_values": {
+        "Vein": 1459,
+        "Replacement": 184,
+        "Placer": 158,
+        "Unknown": 116,
+        "Contact Metamorphic": 109,
+        "Sedimentary": 108,
+        "Contact Metasomatic": 53,
+        "Stratabound": 35
+      }
+    },
+    "prod_size": {
+      "dtype": "str",
+      "null_count": 9030,
+      "null_rate": 0.586059,
+      "n_unique": 6,
+      "unique_rate": 0.000941,
+      "top_values": {
+        "S": 3009,
+        "N": 2788,
+        "M": 225,
+        "Y": 147,
+        "L": 145,
+        "U": 64
+      },
+      "censoring_markers": {
+        "lt_prefixed": 0,
+        "markers": 64
+      }
+    },
+    "dev_stat": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 6,
+      "unique_rate": 0.000389,
+      "top_values": {
+        "Past Producer": 6743,
+        "Occurrence": 4135,
+        "Prospect": 2461,
+        "Unknown": 1059,
+        "Producer": 803,
+        "Plant": 207
+      }
+    },
+    "ore": {
+      "dtype": "str",
+      "null_count": 11331,
+      "null_rate": 0.735397,
+      "n_unique": 1253,
+      "unique_rate": 0.307334,
+      "top_values": {
+        "Gold": 538,
+        "Scheelite": 288,
+        "Cinnabar": 240,
+        "Galena": 151,
+        "Barite": 92,
+        "Turquoise": 70,
+        "Malachite": 49,
+        "Pyrite": 49
+      }
+    },
+    "gangue": {
+      "dtype": "str",
+      "null_count": 12761,
+      "null_rate": 0.828206,
+      "n_unique": 882,
+      "unique_rate": 0.333207,
+      "top_values": {
+        "Quartz": 568,
+        "Calcite, Quartz": 138,
+        "Pyrite": 120,
+        "Calcite": 112,
+        "Pyrite, Quartz": 111,
+        "Iron, Quartz": 41,
+        "Ankerite, Calcite, Graphite, Pyrite, Pyrolusite, Quartz, Rhodochrosite": 39,
+        "Limonite": 38
+      }
+    },
+    "other_matl": {
+      "dtype": "str",
+      "null_count": 14918,
+      "null_rate": 0.968198,
+      "n_unique": 316,
+      "unique_rate": 0.644898,
+      "top_values": {
+        "Pyrite": 52,
+        "Barite": 26,
+        "Galena": 12,
+        "Limonite": 8,
+        "Fluorite": 6,
+        "Magnetite": 6,
+        "Gold": 6,
+        "Galena, Sphalerite": 5
+      }
+    },
+    "orebody_fm": {
+      "dtype": "str",
+      "null_count": 12268,
+      "null_rate": 0.79621,
+      "n_unique": 641,
+      "unique_rate": 0.20414,
+      "top_values": {
+        "TABULAR": 1393,
+        "IRREGULAR": 272,
+        "BLANKET": 151,
+        "TABULAR TO IRREGULAR": 67,
+        "tabular": 59,
+        "BEDDED": 51,
+        "LENSES": 51,
+        "LINEAR": 42
+      }
+    },
+    "work_type": {
+      "dtype": "str",
+      "null_count": 14022,
+      "null_rate": 0.910047,
+      "n_unique": 6,
+      "unique_rate": 0.004329,
+      "top_values": {
+        "Underground": 715,
+        "Surface/Underground": 436,
+        "Surface": 189,
+        "Unknown": 34,
+        "Surface, Underground": 11,
+        "Underground, Surface": 1
+      }
+    },
+    "model": {
+      "dtype": "str",
+      "null_count": 12912,
+      "null_rate": 0.838006,
+      "n_unique": 81,
+      "unique_rate": 0.032452,
+      "top_values": {
+        "150: Epithermal vein, Comstock": 385,
+        "85: Polymetallic veins": 365,
+        "273: Low-sulfide Au-quartz vein": 261,
+        "42: W skarn": 249,
+        "177: Hot-spring Hg": 160,
+        "119: Placer Au-PGE": 156,
+        "72: Polymetallic replacement": 144,
+        "173: Sediment-hosted Au": 84
+      }
+    },
+    "alteration": {
+      "dtype": "str",
+      "null_count": 13175,
+      "null_rate": 0.855075,
+      "n_unique": 1374,
+      "unique_rate": 0.615316,
+      "top_values": {
+        "Silicification": 298,
+        "Oxidation": 141,
+        "Sericitization": 21,
+        "Argillic": 21,
+        "Hydrothermal": 21,
+        "Silication": 20,
+        "Oxidation, Silicification": 14,
+        "Kaolinization": 14
+      }
+    },
+    "conc_proc": {
+      "dtype": "str",
+      "null_count": 14058,
+      "null_rate": 0.912383,
+      "n_unique": 615,
+      "unique_rate": 0.455556,
+      "top_values": {
+        "Oxidation": 177,
+        "Hydrothermal": 115,
+        "Replacement": 105,
+        "Hydrothermal Fluids In Open Space Fillings.": 55,
+        "Contact Metamorphism": 22,
+        "Replacement, Contact Metamorphism": 18,
+        "Hydrothermal Replacement": 17,
+        "Igneous Intrusion": 15
+      }
+    },
+    "names": {
+      "dtype": "str",
+      "null_count": 9145,
+      "null_rate": 0.593523,
+      "n_unique": 5684,
+      "unique_rate": 0.907552,
+      "top_values": {
+        "Silver Occurrence": 30,
+        "Sand and Gravel Pit": 29,
+        "Gold Occurrence": 20,
+        "Copper Occurrence": 17,
+        "Perlite Deposit": 13,
+        "Mohawk No. 2 Claim": 11,
+        "Tungsten Occurrence": 10,
+        "Gold and Silver Occurrence": 10
+      }
+    },
+    "ore_ctrl": {
+      "dtype": "str",
+      "null_count": 12162,
+      "null_rate": 0.78933,
+      "n_unique": 2132,
+      "unique_rate": 0.656808,
+      "top_values": {
+        "Shear Zone": 124,
+        "Fault Zone": 116,
+        "No Information": 111,
+        "Fractures": 54,
+        "Igneous Contact": 51,
+        "Shear Zones": 39,
+        "Faults": 33,
+        "Fault And Joint Fractures": 31
+      }
+    },
+    "reporter": {
+      "dtype": "str",
+      "null_count": 50,
+      "null_rate": 0.003245,
+      "n_unique": 810,
+      "unique_rate": 0.052741,
+      "top_values": {
+        "Western Field Operations Center (WFOC)": 3112,
+        "Ridenour, James": 2457,
+        "La Pointe, D.D. (Tingley, J.V.)": 1028,
+        "Schmauch, Steven W.": 603,
+        "Miller": 390,
+        "Kirkham, Richard A.": 383,
+        "Fiebelkorn, J. B. (Stewart, J. H.)": 325,
+        "La Pointe, D. D.": 287
+      }
+    },
+    "hrock_unit": {
+      "dtype": "str",
+      "null_count": 13436,
+      "null_rate": 0.872015,
+      "n_unique": 778,
+      "unique_rate": 0.394523,
+      "top_values": {
+        "Harmony Formation": 63,
+        "Prospect Mountain Quartzite": 59,
+        "Jarbidge Rhyolite": 56,
+        "Luning": 53,
+        "Auld Lang Syne Group": 52,
+        "Wyman Formation": 42,
+        "Alta Andesite": 41,
+        "Hamburg Dolomite": 39
+      }
+    },
+    "hrock_type": {
+      "dtype": "str",
+      "null_count": 9900,
+      "null_rate": 0.642523,
+      "n_unique": 743,
+      "unique_rate": 0.134895,
+      "top_values": {
+        "Limestone": 1006,
+        "Rhyolite": 490,
+        "Andesite": 282,
+        "Quartzite": 241,
+        "Dolomite": 221,
+        "Diorite": 183,
+        "Granite": 167,
+        "Volcanic Rock (Aphanitic)": 128
+      }
+    },
+    "arock_unit": {
+      "dtype": "str",
+      "null_count": 14891,
+      "null_rate": 0.966446,
+      "n_unique": 258,
+      "unique_rate": 0.499033,
+      "top_values": {
+        "Jarbidge Rhyolite": 58,
+        "Granitic Rocks": 30,
+        "Sylvania Pluton": 28,
+        "Osgood Mtns. Stock": 13,
+        "Milltown Andesite": 9,
+        "Troy Peak Pluton": 8,
+        "Mountain City Quartz Monzonite": 8,
+        "Wonder Rhyolite": 7
+      }
+    },
+    "arock_type": {
+      "dtype": "str",
+      "null_count": 12527,
+      "null_rate": 0.813019,
+      "n_unique": 275,
+      "unique_rate": 0.095453,
+      "top_values": {
+        "Diorite": 562,
+        "Rhyolite": 433,
+        "Granite": 379,
+        "Quartz Monzonite": 284,
+        "Andesite": 141,
+        "Volcanic Rock (Aphanitic)": 123,
+        "Monzonite": 63,
+        "Tuff": 52
+      }
+    },
+    "structure": {
+      "dtype": "str",
+      "null_count": 12918,
+      "null_rate": 0.838396,
+      "n_unique": 1774,
+      "unique_rate": 0.71245,
+      "top_values": {
+        "Faults": 118,
+        "Fault": 49,
+        "Fractures, Postmineral Faults": 41,
+        "Granodiorite Stock With Assoc. Faults, Fractures": 36,
+        "Thrust Fault": 30,
+        "Shear Zone": 30,
+        "Crater Range": 28,
+        "Fractures": 22
+      }
+    },
+    "tectonic": {
+      "dtype": "str",
+      "null_count": 15127,
+      "null_rate": 0.981763,
+      "n_unique": 94,
+      "unique_rate": 0.33452,
+      "top_values": {
+        "Basin And Range": 118,
+        "Mobile Belt": 24,
+        "Basin & Range": 11,
+        "The Bald Mountain district is located in an area of thinned crust along the eastern side of the Late Proterozoic rift that split the North American craton. It is also in the west-central portion of the Late Devonian-Early Mississippian Antler foreland basin, and near the eastern edge of deformation related to the late Paleozoic Humboldt orogeny.": 11,
+        "Complex Basin And Range Faulting": 7,
+        "Back-Arc Extensional Cratonic Basin": 5,
+        "Small": 4,
+        "Basin and Range": 4
+      }
+    },
+    "ref": {
+      "dtype": "str",
+      "null_count": 721,
+      "null_rate": 0.046794,
+      "n_unique": 12096,
+      "unique_rate": 0.823585,
+      "top_values": {
+        "MILLER, 1996, MLA REPORT IN PREPARATION.": 128,
+        "OBSERVATION": 106,
+        "AREAS OF DEVELOPMENT INTEREST IN THAT PART OF THE TOQUIMARANGE, NEVADA, ADMINISTERED AS TOIYABE NATIONAL FOREST.": 106,
+        "U.S. BUREAU OF MINES FILES (WFOC).": 91,
+        "MILLER, M.S., U.S. BUREAU OF MINES MLA REPORT IN PROGRESS,1994.": 76,
+        "KLEINHAMPL, F.J. AND ZIONY, J.I., GEOLOGY AND MINERAL DEPOSITS OF NORTHERN NYE CO.:  NEV. BUR. OF MINES AND GEOLOGY, BULLETIN, IN PRESS": 51,
+        "UNPUBLISHED REPORT, AREAS OF DEVELOPMENT INTEREST IN THATPART OF THE TOIYABE RANGE, NEVADA, ADMINISTERED ASTOIYABE NATIONAL FOREST.": 51,
+        "STAFF, 1988, DIRECTORY OF NEVADA MINE OPERATIONS ACTIVE DURING CALENDAR YEAR 1987:  NEVADA DIVISION OF MINE INSPECTION, 84 P": 47
+      }
+    },
+    "yfp_ba": {
+      "dtype": "str",
+      "null_count": 15247,
+      "null_rate": 0.989551,
+      "n_unique": 2,
+      "unique_rate": 0.012422,
+      "top_values": {
+        "<": 138,
+        ">": 23
+      },
+      "censoring_markers": {
+        "lt_prefixed": 138,
+        "markers": 0
+      }
+    },
+    "yr_fst_prd": {
+      "dtype": "float64",
+      "null_count": 13936,
+      "null_rate": 0.904465,
+      "n_unique": 137,
+      "unique_rate": 0.093071,
+      "numeric": {
+        "min": 1036.0,
+        "p05": 1868.0,
+        "median": 1922.5,
+        "p95": 1989.0,
+        "max": 2005.0,
+        "mean": 1925.9327445652175,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "ylp_ba": {
+      "dtype": "str",
+      "null_count": 15379,
+      "null_rate": 0.998118,
+      "n_unique": 2,
+      "unique_rate": 0.068966,
+      "top_values": {
+        ">": 27,
+        "<": 2
+      },
+      "censoring_markers": {
+        "lt_prefixed": 2,
+        "markers": 0
+      }
+    },
+    "yr_lst_prd": {
+      "dtype": "float64",
+      "null_count": 15150,
+      "null_rate": 0.983255,
+      "n_unique": 82,
+      "unique_rate": 0.317829,
+      "numeric": {
+        "min": 1883.0,
+        "p05": 1918.0,
+        "median": 1980.0,
+        "p95": 2004.0,
+        "max": 2009.0,
+        "mean": 1968.8720930232557,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "dy_ba": {
+      "dtype": "str",
+      "null_count": 14897,
+      "null_rate": 0.966835,
+      "n_unique": 2,
+      "unique_rate": 0.003914,
+      "top_values": {
+        "<": 485,
+        ">": 26
+      },
+      "censoring_markers": {
+        "lt_prefixed": 485,
+        "markers": 0
+      }
+    },
+    "disc_yr": {
+      "dtype": "float64",
+      "null_count": 13097,
+      "null_rate": 0.850013,
+      "n_unique": 151,
+      "unique_rate": 0.06534,
+      "numeric": {
+        "min": 1820.0,
+        "p05": 1865.0,
+        "median": 1916.0,
+        "p95": 1983.0,
+        "max": 2002.0,
+        "mean": 1919.0475984422328,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "prod_yrs": {
+      "dtype": "str",
+      "null_count": 15052,
+      "null_rate": 0.976895,
+      "n_unique": 290,
+      "unique_rate": 0.814607,
+      "top_values": {
+        "TO 1943": 10,
+        "TO 1940": 6,
+        "TO 1941": 5,
+        "TO 1956": 4,
+        "TO 1959": 4,
+        "UNKNOWN": 3,
+        "TO 1942": 3,
+        "TO 1958": 3
+      },
+      "censoring_markers": {
+        "lt_prefixed": 0,
+        "markers": 1
+      }
+    },
+    "discr": {
+      "dtype": "str",
+      "null_count": 14558,
+      "null_rate": 0.944834,
+      "n_unique": 751,
+      "unique_rate": 0.883529,
+      "top_values": {
+        "Unknown": 8,
+        "P. Downey": 5,
+        "Horgan And D'Arcy": 5,
+        "Mr. Noe": 4,
+        "Clyde Garrett": 4,
+        "Lyle F. Campbell": 4,
+        "Harry Stimler And William Marsh Of Tonopah, Grubstaked By Jim Butler And Tom Kendall": 4,
+        "Edward Knight and Emmet Chase": 4
+      }
+    },
+    "score": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 5,
+      "unique_rate": 0.000325,
+      "top_values": {
+        "D": 8807,
+        "C": 3133,
+        "B": 2582,
+        "E": 721,
+        "A": 165
+      }
+    }
+  }
+}

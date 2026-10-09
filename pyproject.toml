@@ -1,0 +1,41 @@
+[project]
+name = "mineral-prospectivity"
+version = "0.1.0"
+description = "How much of a stream-sediment mineral prospectivity model's skill is spatial leakage? A pre-registered, cairn-verified study on USGS NURE and MRDS data."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+authors = [{ name = "Ethan Levy", email = "ethannol@gmail.com" }]
+dependencies = [
+    "cairn",
+    "pandas>=2.2",
+    "numpy>=2.0",
+    "scipy>=1.14",
+    "scikit-learn>=1.5",
+    "matplotlib>=3.9",
+    "pyarrow>=17",
+    "pyproj>=3.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "ruff>=0.8"]
+
+[tool.uv.sources]
+cairn = { path = "../cairn", editable = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prospectivity"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

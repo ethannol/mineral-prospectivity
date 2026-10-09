@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.cairn/runs/
+.cairn/stop-*.count
+.cairn/verify.json
+data/archive/*.zip

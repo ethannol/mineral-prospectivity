@@ -1,0 +1,32 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "text": "For the gradient boosted model, what is the AUC (and average precision) under random stratified 5-fold CV versus spatial block CV at the reference block size, each with its spread over 5 repetitions, and what is the difference?",
+      "status": "open",
+      "answer_keys": [],
+      "notes": ""
+    },
+    {
+      "id": "q2",
+      "text": "Under spatial block CV at the reference block size, does either model rank held-out gold-producer cells better than chance (mean AUC at least 0.60 and minimum over repetitions above 0.55), and what fraction of held-out positives fall in the top 5 and top 10 percent of cells?",
+      "status": "open",
+      "answer_keys": [],
+      "notes": ""
+    },
+    {
+      "id": "q3",
+      "text": "Is the analytical batch learnable: how does AUC change when the method family is left out entirely (leave-one-family-out), and when it is added as a covariate (exploratory)?",
+      "status": "open",
+      "answer_keys": [],
+      "notes": ""
+    },
+    {
+      "id": "q4",
+      "text": "Which elements carry the signal in the held-out predictions, and are they plausible gold pathfinders or lithological proxies? (exploratory)",
+      "status": "open",
+      "answer_keys": [],
+      "notes": ""
+    }
+  ]
+}

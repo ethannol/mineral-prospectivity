@@ -1,0 +1,2038 @@
+{
+  "name": "nure_nv_sediment",
+  "source": "data/raw/nure_nv_sediment.csv",
+  "sha256": "6fe27c3c557bdeb9bdc5af6e9fc84028668513bd2256cde6b9f4e30d6da78f80",
+  "rows": 27630,
+  "columns": 145,
+  "duplicate_rows": 0,
+  "candidate_keys": [
+    [
+      "rec_no"
+    ]
+  ],
+  "fields": {
+    "rec_no": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 27630,
+      "unique_rate": 1.0,
+      "numeric": {
+        "min": 5135352.0,
+        "p05": 5136751.45,
+        "median": 5149407.5,
+        "p95": 5168646.55,
+        "max": 5170556.0,
+        "mean": 5150276.756605139,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "prime_id": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 25171,
+      "unique_rate": 0.911003,
+      "top_values": {
+        "20729": 4,
+        "EYAG068S1": 2,
+        "EYAG069S1": 2,
+        "EYAG070S1": 2,
+        "EYAH001S1": 2,
+        "EYAH002S1": 2,
+        "EYAH003S1": 2,
+        "EYAH004S1": 2
+      }
+    },
+    "replc": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 5,
+      "unique_rate": 0.000181,
+      "numeric": {
+        "min": 0.0,
+        "p05": 0.0,
+        "median": 0.0,
+        "p95": 100.0,
+        "max": 111.0,
+        "mean": 26.298986608758597,
+        "zeros": 20376,
+        "negatives": 0
+      }
+    },
+    "samptyp": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 14,
+      "unique_rate": 0.000507,
+      "numeric": {
+        "min": 50.0,
+        "p05": 50.0,
+        "median": 61.0,
+        "p95": 72.0,
+        "max": 99.0,
+        "mean": 62.47379659790083,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "rec_cnt": {
+      "dtype": "int64",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 2,
+      "unique_rate": 7.2e-05,
+      "numeric": {
+        "min": 1.0,
+        "p05": 1.0,
+        "median": 1.0,
+        "p95": 2.0,
+        "max": 2.0,
+        "mean": 1.072819399203764,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "latitude": {
+      "dtype": "float64",
+      "null_count": 40,
+      "null_rate": 0.001448,
+      "n_unique": 18339,
+      "unique_rate": 0.664697,
+      "numeric": {
+        "min": 35.116,
+        "p05": 35.8235,
+        "median": 39.3256,
+        "p95": 41.786055,
+        "max": 41.9973,
+        "mean": 39.259121518666184,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "longitude": {
+      "dtype": "float64",
+      "null_count": 43,
+      "null_rate": 0.001556,
+      "n_unique": 17718,
+      "unique_rate": 0.642259,
+      "numeric": {
+        "min": -119.9984,
+        "p05": -119.5287,
+        "median": -116.3491,
+        "p95": -114.30982999999999,
+        "max": -114.0381,
+        "mean": -116.65515521078768,
+        "zeros": 0,
+        "negatives": 27587
+      }
+    },
+    "doelab": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 2,
+      "unique_rate": 7.2e-05,
+      "top_values": {
+        "SRL-W": 18735,
+        "LLL": 8895
+      }
+    },
+    "laslid": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "ornlid": {
+      "dtype": "float64",
+      "null_count": 21616,
+      "null_rate": 0.782338,
+      "n_unique": 6014,
+      "unique_rate": 1.0,
+      "numeric": {
+        "min": 214585.0,
+        "p05": 223474.65,
+        "median": 274276.5,
+        "p95": 279799.35,
+        "max": 280125.0,
+        "mean": 270606.92966411705,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "srlid": {
+      "dtype": "str",
+      "null_count": 7254,
+      "null_rate": 0.262541,
+      "n_unique": 18364,
+      "unique_rate": 0.901256,
+      "top_values": {
+        "EYAG068S1": 2,
+        "EYAG069S1": 2,
+        "EYAG070S1": 2,
+        "EYAH001S1": 2,
+        "EYAH002S1": 2,
+        "EYAH003S1": 2,
+        "EYAH004S1": 2,
+        "EYAH005S1": 2
+      }
+    },
+    "lllid": {
+      "dtype": "str",
+      "null_count": 18735,
+      "null_rate": 0.678067,
+      "n_unique": 8445,
+      "unique_rate": 0.94941,
+      "top_values": {
+        "20729": 4,
+        "7032": 2,
+        "9404": 2,
+        "20349": 2,
+        "20359": 2,
+        "20369": 2,
+        "20379": 2,
+        "20389": 2
+      },
+      "mixed_numeric_text": {
+        "numeric_like": 7572,
+        "non_numeric": 1323,
+        "non_numeric_examples": [
+          "36316WR",
+          "58091SD",
+          "5184WR",
+          "36317WR",
+          "7432WS"
+        ]
+      }
+    },
+    "site": {
+      "dtype": "float64",
+      "null_count": 27532,
+      "null_rate": 0.996453,
+      "n_unique": 98,
+      "unique_rate": 1.0,
+      "numeric": {
+        "min": 6324.0,
+        "p05": 6345.4,
+        "median": 13499.5,
+        "p95": 41020.1,
+        "max": 57904.0,
+        "mean": 19965.214285714286,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "state": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 1,
+      "unique_rate": 3.6e-05,
+      "top_values": {
+        "NV": 27630
+      }
+    },
+    "quad": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 18,
+      "unique_rate": 0.000651,
+      "top_values": {
+        "RENO": 2907,
+        "MCDERMITT": 2422,
+        "KINGMAN": 2128,
+        "ELY": 1992,
+        "WALKER LAKE": 1990,
+        "LUND": 1971,
+        "WELLS": 1902,
+        "VYA": 1730
+      }
+    },
+    "mapcode": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 18,
+      "unique_rate": 0.000651,
+      "top_values": {
+        "NJ1101": 2904,
+        "NK1108": 2422,
+        "NI1103": 2128,
+        "NJ1104": 1993,
+        "NJ1103": 1992,
+        "NJ1106": 1971,
+        "NK1109": 1902,
+        "NK1107": 1730
+      }
+    },
+    "fips": {
+      "dtype": "float64",
+      "null_count": 43,
+      "null_rate": 0.001556,
+      "n_unique": 17,
+      "unique_rate": 0.000616,
+      "numeric": {
+        "min": 32001.0,
+        "p05": 32001.0,
+        "median": 32013.0,
+        "p95": 32033.0,
+        "max": 32510.0,
+        "mean": 32016.41059194548,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "huc8": {
+      "dtype": "float64",
+      "null_count": 43,
+      "null_rate": 0.001556,
+      "n_unique": 71,
+      "unique_rate": 0.002574,
+      "numeric": {
+        "min": 15010005.0,
+        "p05": 15010012.0,
+        "median": 16060001.0,
+        "p95": 17050105.0,
+        "max": 18090203.0,
+        "mean": 16057964.560263893,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "ls_map": {
+      "dtype": "str",
+      "null_count": 43,
+      "null_rate": 0.001556,
+      "n_unique": 1840,
+      "unique_rate": 0.066698,
+      "top_values": {
+        "36116NWG2": 743,
+        "36116NWF2": 366,
+        "36116NWG3": 286,
+        "36116NWG1": 101,
+        "36116NWF3": 79,
+        "36116NWF1": 66,
+        "39120NWF3": 51,
+        "42116NWA2": 50
+      }
+    },
+    "study": {
+      "dtype": "str",
+      "null_count": 25832,
+      "null_rate": 0.934926,
+      "n_unique": 2,
+      "unique_rate": 0.001112,
+      "top_values": {
+        "DS25": 1612,
+        "PO03": 186
+      }
+    },
+    "phase": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "strbasin": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "b_lat_c": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "b_long_c": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "smpmedia": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 1,
+      "unique_rate": 3.6e-05,
+      "top_values": {
+        "SEDIMENT": 27630
+      }
+    },
+    "sampsrc": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 5,
+      "unique_rate": 0.000181,
+      "top_values": {
+        "STREAM": 17518,
+        "SOIL": 9709,
+        "PLAYA": 243,
+        "OTHER": 159,
+        "LAKE": 1
+      }
+    },
+    "sedcond": {
+      "dtype": "str",
+      "null_count": 10092,
+      "null_rate": 0.365255,
+      "n_unique": 2,
+      "unique_rate": 0.000114,
+      "top_values": {
+        "DRY": 14418,
+        "WET": 3120
+      }
+    },
+    "sizefrxn": {
+      "dtype": "str",
+      "null_count": 402,
+      "null_rate": 0.014549,
+      "n_unique": 3,
+      "unique_rate": 0.00011,
+      "top_values": {
+        "-100 MESH": 17840,
+        "-18/+35 MESH": 7013,
+        "-18/+100 MESH": 2375
+      }
+    },
+    "osamptyp": {
+      "dtype": "str",
+      "null_count": 23372,
+      "null_rate": 0.845892,
+      "n_unique": 1,
+      "unique_rate": 0.000235,
+      "top_values": {
+        "STREAM SEDIMENT": 4258
+      }
+    },
+    "lsamptyp": {
+      "dtype": "str",
+      "null_count": 21616,
+      "null_rate": 0.782338,
+      "n_unique": 1,
+      "unique_rate": 0.000166,
+      "top_values": {
+        "SEDIMENT": 6014
+      }
+    },
+    "ssamptyp": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 7,
+      "unique_rate": 0.000409,
+      "top_values": {
+        "STREAM SEDIMENT ONLY": 8370,
+        "SOIL": 8097,
+        "STREAM SEDIMENT + WATER": 273,
+        "PLAYA": 224,
+        "OTHER SEDIMENT": 140,
+        "OTHER RESIN": 18,
+        "SPRING WATER": 1
+      }
+    },
+    "sedtreat": {
+      "dtype": "str",
+      "null_count": 27444,
+      "null_rate": 0.993268,
+      "n_unique": 1,
+      "unique_rate": 0.005376,
+      "top_values": {
+        "SIEVED": 186
+      }
+    },
+    "sampdat": {
+      "dtype": "str",
+      "null_count": 4068,
+      "null_rate": 0.147231,
+      "n_unique": 640,
+      "unique_rate": 0.027162,
+      "top_values": {
+        "1979/06/19": 203,
+        "1979/07/19": 201,
+        "1979/05/25": 177,
+        "1979/07/18": 174,
+        "1979/07/17": 171,
+        "1979/05/17": 171,
+        "1979/12/08": 169,
+        "1979/05/22": 165
+      },
+      "datetime": {
+        "min": "1975-08-21 00:00:00",
+        "max": "1980-09-02 00:00:00"
+      }
+    },
+    "samphr": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "sampler": {
+      "dtype": "float64",
+      "null_count": 8895,
+      "null_rate": 0.321933,
+      "n_unique": 51,
+      "unique_rate": 0.002722,
+      "numeric": {
+        "min": 1.0,
+        "p05": 13.0,
+        "median": 45.0,
+        "p95": 107.0,
+        "max": 111.0,
+        "mean": 53.92676808113157,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "grabs": {
+      "dtype": "float64",
+      "null_count": 8895,
+      "null_rate": 0.321933,
+      "n_unique": 22,
+      "unique_rate": 0.001174,
+      "numeric": {
+        "min": 1.0,
+        "p05": 10.0,
+        "median": 10.0,
+        "p95": 12.0,
+        "max": 40.0,
+        "mean": 10.14032559380838,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "weather": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "airtemp": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "wtrtemp": {
+      "dtype": "float64",
+      "null_count": 27343,
+      "null_rate": 0.989613,
+      "n_unique": 28,
+      "unique_rate": 0.097561,
+      "numeric": {
+        "min": 2.0,
+        "p05": 4.300000000000001,
+        "median": 16.0,
+        "p95": 25.0,
+        "max": 73.0,
+        "mean": 15.519163763066203,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "ph": {
+      "dtype": "float64",
+      "null_count": 27343,
+      "null_rate": 0.989613,
+      "n_unique": 32,
+      "unique_rate": 0.111498,
+      "numeric": {
+        "min": 3.8,
+        "p05": 7.13,
+        "median": 8.1,
+        "p95": 9.1,
+        "max": 9.4,
+        "mean": 8.080487804878047,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "cond": {
+      "dtype": "float64",
+      "null_count": 27343,
+      "null_rate": 0.989613,
+      "n_unique": 106,
+      "unique_rate": 0.369338,
+      "numeric": {
+        "min": 20.0,
+        "p05": 50.0,
+        "median": 160.0,
+        "p95": 488.09999999999974,
+        "max": 900.0,
+        "mean": 194.26829268292684,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "alk": {
+      "dtype": "float64",
+      "null_count": 27343,
+      "null_rate": 0.989613,
+      "n_unique": 58,
+      "unique_rate": 0.202091,
+      "numeric": {
+        "min": 0.25,
+        "p05": 0.5,
+        "median": 1.6,
+        "p95": 4.1,
+        "max": 5.7,
+        "mean": 1.8288850174216027,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "o_diss": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "scin": {
+      "dtype": "float64",
+      "null_count": 9034,
+      "null_rate": 0.326963,
+      "n_unique": 144,
+      "unique_rate": 0.007744,
+      "numeric": {
+        "min": 0.0,
+        "p05": 21.0,
+        "median": 49.0,
+        "p95": 92.0,
+        "max": 280.0,
+        "mean": 51.78167347816735,
+        "zeros": 4,
+        "negatives": 0
+      }
+    },
+    "orgn_pct": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "sampodor": {
+      "dtype": "str",
+      "null_count": 23958,
+      "null_rate": 0.867101,
+      "n_unique": 2,
+      "unique_rate": 0.000545,
+      "top_values": {
+        "NONE": 3671,
+        "H2S": 1
+      }
+    },
+    "smpcolr": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "sgeounit": {
+      "dtype": "str",
+      "null_count": 8902,
+      "null_rate": 0.322186,
+      "n_unique": 252,
+      "unique_rate": 0.013456,
+      "top_values": {
+        "QTRN": 9774,
+        "UNKN": 3071,
+        "TRTR": 2244,
+        "QTAL": 1060,
+        "TRVY": 226,
+        "JRSS": 219,
+        "QTPL": 210,
+        "CRTC": 94
+      }
+    },
+    "rocktyp": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 10,
+      "unique_rate": 0.000584,
+      "top_values": {
+        "UNCONSOLIDATED VALLEY FILL": 7627,
+        "OTHER": 4656,
+        "VOLCANIC - FELSIC": 2286,
+        "VOLCANICS - MAFIC": 1265,
+        "CARBONATE": 432,
+        "PLUTONIC - FELSIC": 269,
+        "METAMORPHIC": 267,
+        "SANDSTONE": 180
+      }
+    },
+    "rockclr": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "sedtype": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 5,
+      "unique_rate": 0.000292,
+      "top_values": {
+        "SAND": 9299,
+        "PEBBLES & COARSER": 3930,
+        "SILT & CLAY": 3458,
+        "OTHER": 431,
+        "MUCK": 5
+      }
+    },
+    "sedcolr": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "strwdth": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "strwdthc": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 7,
+      "unique_rate": 0.000409,
+      "top_values": {
+        "DRY": 16830,
+        "2 - 4 FT": 97,
+        "1 - 2 FT": 94,
+        "0.5 - 1 FT": 57,
+        "4 - 8 FT": 26,
+        "8 - 16 FT": 13,
+        "< 0.5 FT": 6
+      },
+      "censoring_markers": {
+        "lt_prefixed": 6,
+        "markers": 0
+      }
+    },
+    "strdpth": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "strdpthc": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 6,
+      "unique_rate": 0.00035,
+      "top_values": {
+        "DRY": 16851,
+        "0.5 - 1 FT": 134,
+        "< 0.5 FT": 101,
+        "1 - 2 FT": 30,
+        "2 - 4 FT": 5,
+        "4 - 8 FT": 2
+      },
+      "censoring_markers": {
+        "lt_prefixed": 101,
+        "markers": 0
+      }
+    },
+    "wtrlevel": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 4,
+      "unique_rate": 0.000234,
+      "top_values": {
+        "DRY": 16838,
+        "NORMAL": 223,
+        "LOW": 38,
+        "HIGH": 24
+      }
+    },
+    "strflow": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "strflowc": {
+      "dtype": "str",
+      "null_count": 23328,
+      "null_rate": 0.8443,
+      "n_unique": 5,
+      "unique_rate": 0.001162,
+      "top_values": {
+        "STAGNANT": 4263,
+        "MODERATE": 21,
+        "FAST": 10,
+        "SLOW": 7,
+        "TORRENT": 1
+      }
+    },
+    "wtrcolr": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "strchanl": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "vegtype": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 6,
+      "unique_rate": 0.00035,
+      "top_values": {
+        "DESERT SCRUB": 14352,
+        "FOREST": 1795,
+        "GRASS OR PASTURE": 709,
+        "OTHER": 228,
+        "SALTBRUSH": 24,
+        "MARSH OR SWAMP": 15
+      }
+    },
+    "vegdens": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 3,
+      "unique_rate": 0.000175,
+      "top_values": {
+        "MODERATE": 9875,
+        "SPARSE": 5521,
+        "DENSE": 1727
+      }
+    },
+    "relief": {
+      "dtype": "str",
+      "null_count": 10507,
+      "null_rate": 0.380275,
+      "n_unique": 4,
+      "unique_rate": 0.000234,
+      "top_values": {
+        "FLAT (0 - 3 M)": 7356,
+        "LOW (3 - 15 M)": 4819,
+        "GENTLE (15 - 60 M)": 2834,
+        "MODERATE-HIGH (> 60 M)": 2114
+      }
+    },
+    "contamc": {
+      "dtype": "str",
+      "null_count": 3886,
+      "null_rate": 0.140644,
+      "n_unique": 70,
+      "unique_rate": 0.002948,
+      "top_values": {
+        "GRAZING": 10984,
+        "NONE": 8282,
+        "SEWAGE": 1353,
+        "OTHER": 796,
+        "MINING": 484,
+        "GRAZING;MINING": 383,
+        "GRAZING;GARBAGE": 369,
+        "GRAZING;FARMING": 209
+      }
+    },
+    "specms": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "tapedata": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "analdate": {
+      "dtype": "str",
+      "null_count": 19549,
+      "null_rate": 0.707528,
+      "n_unique": 82,
+      "unique_rate": 0.010147,
+      "top_values": {
+        "1981/03/19": 329,
+        "1981/03/20": 326,
+        "1979/09/30": 323,
+        "1979/12/12": 318,
+        "1979/12/03": 301,
+        "1980/03/25": 285,
+        "1980/03/26": 251,
+        "1980/02/11": 247
+      },
+      "datetime": {
+        "min": "1979-09-10 00:00:00",
+        "max": "1981-03-23 00:00:00"
+      }
+    },
+    "batch_es": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "asbatch": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "clbatch": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "po4batch": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "snbatch": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "hgbatch": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "ubatch_dn": {
+      "dtype": "float64",
+      "null_count": 23417,
+      "null_rate": 0.847521,
+      "n_unique": 15,
+      "unique_rate": 0.00356,
+      "numeric": {
+        "min": 5209.0,
+        "p05": 5210.0,
+        "median": 5214.0,
+        "p95": 5258.0,
+        "max": 5260.0,
+        "mean": 5219.239259435082,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "ubatch_fl": {
+      "dtype": "float64",
+      "null_count": 25905,
+      "null_rate": 0.937568,
+      "n_unique": 14,
+      "unique_rate": 0.008116,
+      "numeric": {
+        "min": 5183.0,
+        "p05": 5183.0,
+        "median": 5203.0,
+        "p95": 5207.0,
+        "max": 5208.0,
+        "mean": 5196.267246376811,
+        "zeros": 0,
+        "negatives": 0
+      }
+    },
+    "ubatch_ms": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "ubatch_xx": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "u_xx_mthd": {
+      "dtype": "str",
+      "null_count": 21513,
+      "null_rate": 0.77861,
+      "n_unique": 1,
+      "unique_rate": 0.000163,
+      "top_values": {
+        "SR3-XU": 6117
+      }
+    },
+    "u_xx_ppm": {
+      "dtype": "float64",
+      "null_count": 21513,
+      "null_rate": 0.77861,
+      "n_unique": 166,
+      "unique_rate": 0.027137,
+      "numeric": {
+        "min": -0.2,
+        "p05": 0.2,
+        "median": 0.9,
+        "p95": 5.0,
+        "max": 92.1,
+        "mean": 1.5955697237207782,
+        "zeros": 0,
+        "negatives": 101
+      }
+    },
+    "u_dn_ppm": {
+      "dtype": "float64",
+      "null_count": 3079,
+      "null_rate": 0.111437,
+      "n_unique": 1117,
+      "unique_rate": 0.045497,
+      "numeric": {
+        "min": -14.2,
+        "p05": 1.3,
+        "median": 3.1,
+        "p95": 6.1,
+        "max": 248.22,
+        "mean": 3.4736905217710072,
+        "zeros": 0,
+        "negatives": 14
+      }
+    },
+    "u_fl_ppm": {
+      "dtype": "float64",
+      "null_count": 25905,
+      "null_rate": 0.937568,
+      "n_unique": 345,
+      "unique_rate": 0.2,
+      "numeric": {
+        "min": -0.25,
+        "p05": 1.72,
+        "median": 2.59,
+        "p95": 4.127999999999999,
+        "max": 336.0,
+        "mean": 2.970104347826087,
+        "zeros": 0,
+        "negatives": 1
+      }
+    },
+    "u_ms_ppm": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "u_na_ppm": {
+      "dtype": "float64",
+      "null_count": 20684,
+      "null_rate": 0.748607,
+      "n_unique": 4080,
+      "unique_rate": 0.587388,
+      "numeric": {
+        "min": -2.0,
+        "p05": -2.0,
+        "median": 3.3175,
+        "p95": 7.64175,
+        "max": 260.1,
+        "mean": 3.427975482291967,
+        "zeros": 0,
+        "negatives": 947
+      }
+    },
+    "ag_ppm": {
+      "dtype": "float64",
+      "null_count": 8573,
+      "null_rate": 0.310279,
+      "n_unique": 208,
+      "unique_rate": 0.010915,
+      "numeric": {
+        "min": -500.0,
+        "p05": -500.0,
+        "median": -2.0,
+        "p95": 0.6,
+        "max": 683.0,
+        "mean": -178.7510588235294,
+        "zeros": 0,
+        "negatives": 12787
+      }
+    },
+    "al_pct": {
+      "dtype": "float64",
+      "null_count": 1815,
+      "null_rate": 0.065689,
+      "n_unique": 9323,
+      "unique_rate": 0.361147,
+      "numeric": {
+        "min": -0.05,
+        "p05": 1.1044,
+        "median": 6.016,
+        "p95": 8.89,
+        "max": 17.41,
+        "mean": 5.829814030602362,
+        "zeros": 0,
+        "negatives": 353
+      }
+    },
+    "as_ppm": {
+      "dtype": "float64",
+      "null_count": 14583,
+      "null_rate": 0.527796,
+      "n_unique": 3122,
+      "unique_rate": 0.239289,
+      "numeric": {
+        "min": -3.0,
+        "p05": -3.0,
+        "median": 4.0,
+        "p95": 29.990999999999968,
+        "max": 827.0,
+        "mean": 7.82674704529777,
+        "zeros": 0,
+        "negatives": 3318
+      }
+    },
+    "au_ppm": {
+      "dtype": "float64",
+      "null_count": 18498,
+      "null_rate": 0.66949,
+      "n_unique": 239,
+      "unique_rate": 0.026172,
+      "numeric": {
+        "min": -0.01,
+        "p05": -0.01,
+        "median": -0.01,
+        "p95": -0.01,
+        "max": 30.613,
+        "mean": 0.047645970214629865,
+        "zeros": 0,
+        "negatives": 8788
+      }
+    },
+    "b_ppm": {
+      "dtype": "float64",
+      "null_count": 21616,
+      "null_rate": 0.782338,
+      "n_unique": 160,
+      "unique_rate": 0.026605,
+      "numeric": {
+        "min": -10.0,
+        "p05": -10.0,
+        "median": 24.0,
+        "p95": 57.0,
+        "max": 2238.0,
+        "mean": 29.16029265048221,
+        "zeros": 0,
+        "negatives": 331
+      }
+    },
+    "ba_ppm": {
+      "dtype": "float64",
+      "null_count": 8360,
+      "null_rate": 0.30257,
+      "n_unique": 4249,
+      "unique_rate": 0.220498,
+      "numeric": {
+        "min": -100.0,
+        "p05": 62.0,
+        "median": 583.9,
+        "p95": 1828.0,
+        "max": 117100.0,
+        "mean": 749.3661121951219,
+        "zeros": 0,
+        "negatives": 842
+      }
+    },
+    "be_ppm": {
+      "dtype": "float64",
+      "null_count": 15493,
+      "null_rate": 0.560731,
+      "n_unique": 29,
+      "unique_rate": 0.002389,
+      "numeric": {
+        "min": -1.0,
+        "p05": 1.0,
+        "median": 2.0,
+        "p95": 3.0,
+        "max": 36.0,
+        "mean": 1.8703056768558952,
+        "zeros": 0,
+        "negatives": 82
+      }
+    },
+    "bi_ppm": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "br_ppm": {
+      "dtype": "float64",
+      "null_count": 20627,
+      "null_rate": 0.746544,
+      "n_unique": 1467,
+      "unique_rate": 0.209482,
+      "numeric": {
+        "min": -5.0,
+        "p05": -5.0,
+        "median": -5.0,
+        "p95": 9.882199999999967,
+        "max": 516.2,
+        "mean": -1.258786491503641,
+        "zeros": 0,
+        "negatives": 5393
+      }
+    },
+    "ca_pct": {
+      "dtype": "float64",
+      "null_count": 8388,
+      "null_rate": 0.303583,
+      "n_unique": 4225,
+      "unique_rate": 0.219572,
+      "numeric": {
+        "min": -2.0,
+        "p05": -2.0,
+        "median": 1.8,
+        "p95": 20.919000000000015,
+        "max": 41.87,
+        "mean": 3.684283546408897,
+        "zeros": 0,
+        "negatives": 3016
+      }
+    },
+    "cd_ppm": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "ce_ppm": {
+      "dtype": "float64",
+      "null_count": 2455,
+      "null_rate": 0.088853,
+      "n_unique": 5057,
+      "unique_rate": 0.200874,
+      "numeric": {
+        "min": -63.0,
+        "p05": -10.0,
+        "median": 58.0,
+        "p95": 130.72999999999993,
+        "max": 1704.0,
+        "mean": 62.30621727904668,
+        "zeros": 0,
+        "negatives": 1450
+      }
+    },
+    "cl_ppm": {
+      "dtype": "float64",
+      "null_count": 20694,
+      "null_rate": 0.748969,
+      "n_unique": 1198,
+      "unique_rate": 0.172722,
+      "numeric": {
+        "min": -50.0,
+        "p05": -50.0,
+        "median": -50.0,
+        "p95": 312.85,
+        "max": 75570.0,
+        "mean": 68.42570862168397,
+        "zeros": 0,
+        "negatives": 5490
+      }
+    },
+    "co_ppm": {
+      "dtype": "float64",
+      "null_count": 8388,
+      "null_rate": 0.303583,
+      "n_unique": 3360,
+      "unique_rate": 0.174618,
+      "numeric": {
+        "min": -5.0,
+        "p05": -5.0,
+        "median": 6.0,
+        "p95": 15.81,
+        "max": 2485.0,
+        "mean": 5.902448617607317,
+        "zeros": 0,
+        "negatives": 4459
+      }
+    },
+    "cr_ppm": {
+      "dtype": "float64",
+      "null_count": 8373,
+      "null_rate": 0.30304,
+      "n_unique": 3746,
+      "unique_rate": 0.194527,
+      "numeric": {
+        "min": -30.0,
+        "p05": -30.0,
+        "median": 31.0,
+        "p95": 139.0,
+        "max": 13297.0,
+        "mean": 43.93776367035364,
+        "zeros": 0,
+        "negatives": 2377
+      }
+    },
+    "cs_ppm": {
+      "dtype": "float64",
+      "null_count": 20509,
+      "null_rate": 0.742273,
+      "n_unique": 3349,
+      "unique_rate": 0.470299,
+      "numeric": {
+        "min": -30.0,
+        "p05": -30.0,
+        "median": 3.939,
+        "p95": 11.91,
+        "max": 234.6,
+        "mean": -7.34126952675186,
+        "zeros": 0,
+        "negatives": 2821
+      }
+    },
+    "cu_ppm": {
+      "dtype": "float64",
+      "null_count": 15509,
+      "null_rate": 0.56131,
+      "n_unique": 242,
+      "unique_rate": 0.019965,
+      "numeric": {
+        "min": -2.0,
+        "p05": 7.0,
+        "median": 15.0,
+        "p95": 42.0,
+        "max": 11000.0,
+        "mean": 26.157660259054534,
+        "zeros": 0,
+        "negatives": 19
+      }
+    },
+    "dy_ppm": {
+      "dtype": "float64",
+      "null_count": 10738,
+      "null_rate": 0.388636,
+      "n_unique": 4517,
+      "unique_rate": 0.267405,
+      "numeric": {
+        "min": -15.0,
+        "p05": -2.1,
+        "median": 1.9,
+        "p95": 9.077199999999984,
+        "max": 85.9,
+        "mean": 2.3381775041439736,
+        "zeros": 0,
+        "negatives": 6985
+      }
+    },
+    "eu_ppm": {
+      "dtype": "float64",
+      "null_count": 9451,
+      "null_rate": 0.342056,
+      "n_unique": 3636,
+      "unique_rate": 0.200011,
+      "numeric": {
+        "min": -15.5,
+        "p05": -2.7,
+        "median": 0.5018,
+        "p95": 2.3,
+        "max": 183300.0,
+        "mean": 10.589619957093348,
+        "zeros": 0,
+        "negatives": 8158
+      }
+    },
+    "f_ppm": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "fe_pct": {
+      "dtype": "float64",
+      "null_count": 1867,
+      "null_rate": 0.067571,
+      "n_unique": 8584,
+      "unique_rate": 0.333191,
+      "numeric": {
+        "min": -52.1,
+        "p05": 0.5374500000000001,
+        "median": 2.37,
+        "p95": 5.250629999999998,
+        "max": 33.54,
+        "mean": 2.556763490276753,
+        "zeros": 0,
+        "negatives": 467
+      }
+    },
+    "hf_ppm": {
+      "dtype": "float64",
+      "null_count": 3156,
+      "null_rate": 0.114224,
+      "n_unique": 3940,
+      "unique_rate": 0.160987,
+      "numeric": {
+        "min": -15.0,
+        "p05": -15.0,
+        "median": 4.0,
+        "p95": 14.0,
+        "max": 147.0,
+        "mean": 1.1459212919833293,
+        "zeros": 0,
+        "negatives": 7618
+      }
+    },
+    "hg_ppm": {
+      "dtype": "float64",
+      "null_count": 20695,
+      "null_rate": 0.749005,
+      "n_unique": 698,
+      "unique_rate": 0.100649,
+      "numeric": {
+        "min": -500.0,
+        "p05": -500.0,
+        "median": -500.0,
+        "p95": 331.44999999999965,
+        "max": 40620.0,
+        "mean": -380.572631146359,
+        "zeros": 0,
+        "negatives": 6224
+      }
+    },
+    "k_pct": {
+      "dtype": "float64",
+      "null_count": 8543,
+      "null_rate": 0.309193,
+      "n_unique": 3862,
+      "unique_rate": 0.202337,
+      "numeric": {
+        "min": -0.2,
+        "p05": -0.2,
+        "median": 1.8,
+        "p95": 5.0344000000000015,
+        "max": 46.09,
+        "mean": 2.1410615759417406,
+        "zeros": 0,
+        "negatives": 973
+      }
+    },
+    "la_ppm": {
+      "dtype": "float64",
+      "null_count": 4019,
+      "null_rate": 0.145458,
+      "n_unique": 4519,
+      "unique_rate": 0.191394,
+      "numeric": {
+        "min": -7093.0,
+        "p05": -10.0,
+        "median": 31.0,
+        "p95": 71.93,
+        "max": 12313.0,
+        "mean": 33.3663615009953,
+        "zeros": 0,
+        "negatives": 2184
+      }
+    },
+    "li_ppm": {
+      "dtype": "float64",
+      "null_count": 15489,
+      "null_rate": 0.560586,
+      "n_unique": 151,
+      "unique_rate": 0.012437,
+      "numeric": {
+        "min": -5.0,
+        "p05": 5.0,
+        "median": 22.0,
+        "p95": 46.0,
+        "max": 581.0,
+        "mean": 23.74277242401779,
+        "zeros": 0,
+        "negatives": 234
+      }
+    },
+    "lu_ppm": {
+      "dtype": "float64",
+      "null_count": 13571,
+      "null_rate": 0.491169,
+      "n_unique": 3720,
+      "unique_rate": 0.264599,
+      "numeric": {
+        "min": -13000.0,
+        "p05": -2.0,
+        "median": 0.3,
+        "p95": 0.9047999999999985,
+        "max": 5.7,
+        "mean": -1.602021537804965,
+        "zeros": 0,
+        "negatives": 2928
+      }
+    },
+    "mg_pct": {
+      "dtype": "float64",
+      "null_count": 8540,
+      "null_rate": 0.309084,
+      "n_unique": 4888,
+      "unique_rate": 0.25605,
+      "numeric": {
+        "min": -0.906,
+        "p05": 0.075,
+        "median": 0.7,
+        "p95": 3.17,
+        "max": 16.82,
+        "mean": 1.0580584442116292,
+        "zeros": 0,
+        "negatives": 467
+      }
+    },
+    "mn_ppm": {
+      "dtype": "float64",
+      "null_count": 2069,
+      "null_rate": 0.074882,
+      "n_unique": 5757,
+      "unique_rate": 0.225226,
+      "numeric": {
+        "min": -114.0,
+        "p05": 140.0,
+        "median": 538.0,
+        "p95": 1195.0,
+        "max": 295900.0,
+        "mean": 613.177536567427,
+        "zeros": 0,
+        "negatives": 367
+      }
+    },
+    "mo_ppm": {
+      "dtype": "float64",
+      "null_count": 15315,
+      "null_rate": 0.554289,
+      "n_unique": 218,
+      "unique_rate": 0.017702,
+      "numeric": {
+        "min": -4.0,
+        "p05": -4.0,
+        "median": -2.0,
+        "p95": 4.0,
+        "max": 161.0,
+        "mean": -1.4337863580998784,
+        "zeros": 0,
+        "negatives": 9733
+      }
+    },
+    "na_pct": {
+      "dtype": "float64",
+      "null_count": 1700,
+      "null_rate": 0.061527,
+      "n_unique": 6815,
+      "unique_rate": 0.262823,
+      "numeric": {
+        "min": -0.1,
+        "p05": 0.1,
+        "median": 1.442,
+        "p95": 2.7415499999999993,
+        "max": 35.9066,
+        "mean": 1.508417003470883,
+        "zeros": 0,
+        "negatives": 207
+      }
+    },
+    "nb_ppm": {
+      "dtype": "float64",
+      "null_count": 15496,
+      "null_rate": 0.56084,
+      "n_unique": 67,
+      "unique_rate": 0.005522,
+      "numeric": {
+        "min": -5.0,
+        "p05": -5.0,
+        "median": 11.0,
+        "p95": 23.0,
+        "max": 149.0,
+        "mean": 10.368551178506676,
+        "zeros": 0,
+        "negatives": 1821
+      }
+    },
+    "ni_ppm": {
+      "dtype": "float64",
+      "null_count": 15511,
+      "null_rate": 0.561383,
+      "n_unique": 107,
+      "unique_rate": 0.008829,
+      "numeric": {
+        "min": -5.0,
+        "p05": -2.0,
+        "median": 12.0,
+        "p95": 27.0,
+        "max": 9195.0,
+        "mean": 13.825068074923674,
+        "zeros": 0,
+        "negatives": 664
+      }
+    },
+    "p_ppm": {
+      "dtype": "float64",
+      "null_count": 15491,
+      "null_rate": 0.560659,
+      "n_unique": 1262,
+      "unique_rate": 0.103962,
+      "numeric": {
+        "min": -20.0,
+        "p05": 295.0,
+        "median": 666.0,
+        "p95": 1400.0,
+        "max": 18281.0,
+        "mean": 738.3956668588846,
+        "zeros": 0,
+        "negatives": 20
+      }
+    },
+    "pb_ppm": {
+      "dtype": "float64",
+      "null_count": 15489,
+      "null_rate": 0.560586,
+      "n_unique": 193,
+      "unique_rate": 0.015897,
+      "numeric": {
+        "min": -10.0,
+        "p05": -10.0,
+        "median": 15.0,
+        "p95": 37.0,
+        "max": 89867.0,
+        "mean": 49.843670208384815,
+        "zeros": 0,
+        "negatives": 2804
+      }
+    },
+    "pt_ppm": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "rb_ppm": {
+      "dtype": "float64",
+      "null_count": 20509,
+      "null_rate": 0.742273,
+      "n_unique": 2117,
+      "unique_rate": 0.29729,
+      "numeric": {
+        "min": -150.0,
+        "p05": -150.0,
+        "median": 80.46,
+        "p95": 176.5,
+        "max": 700.4,
+        "mean": 9.536129757056589,
+        "zeros": 0,
+        "negatives": 2936
+      }
+    },
+    "sb_ppm": {
+      "dtype": "float64",
+      "null_count": 20508,
+      "null_rate": 0.742237,
+      "n_unique": 3693,
+      "unique_rate": 0.518534,
+      "numeric": {
+        "min": -0.5,
+        "p05": -0.5,
+        "median": 1.284,
+        "p95": 11.688499999999994,
+        "max": 1800.0,
+        "mean": 3.6313352850322946,
+        "zeros": 0,
+        "negatives": 2334
+      }
+    },
+    "sc_ppm": {
+      "dtype": "float64",
+      "null_count": 1669,
+      "null_rate": 0.060405,
+      "n_unique": 5018,
+      "unique_rate": 0.19329,
+      "numeric": {
+        "min": -1.0,
+        "p05": 1.428,
+        "median": 5.9,
+        "p95": 14.3,
+        "max": 58.15,
+        "mean": 6.460318366010555,
+        "zeros": 0,
+        "negatives": 435
+      }
+    },
+    "se_ppm": {
+      "dtype": "float64",
+      "null_count": 21504,
+      "null_rate": 0.778284,
+      "n_unique": 9,
+      "unique_rate": 0.001469,
+      "numeric": {
+        "min": -1.0,
+        "p05": -1.0,
+        "median": -1.0,
+        "p95": 2.0,
+        "max": 9.0,
+        "mean": -0.4048318641854391,
+        "zeros": 0,
+        "negatives": 4667
+      }
+    },
+    "sm_ppm": {
+      "dtype": "float64",
+      "null_count": 9527,
+      "null_rate": 0.344806,
+      "n_unique": 3437,
+      "unique_rate": 0.189858,
+      "numeric": {
+        "min": -182.0,
+        "p05": -2.0,
+        "median": 4.0,
+        "p95": 11.0,
+        "max": 388.0,
+        "mean": 4.1386834281610785,
+        "zeros": 0,
+        "negatives": 4521
+      }
+    },
+    "sn_ppm": {
+      "dtype": "float64",
+      "null_count": 21509,
+      "null_rate": 0.778465,
+      "n_unique": 31,
+      "unique_rate": 0.005065,
+      "numeric": {
+        "min": -5.0,
+        "p05": -5.0,
+        "median": -5.0,
+        "p95": 20.0,
+        "max": 255.0,
+        "mean": 2.386701519359582,
+        "zeros": 0,
+        "negatives": 3487
+      }
+    },
+    "sr_ppm": {
+      "dtype": "float64",
+      "null_count": 11280,
+      "null_rate": 0.408252,
+      "n_unique": 2567,
+      "unique_rate": 0.157003,
+      "numeric": {
+        "min": -50.0,
+        "p05": -50.0,
+        "median": 156.0,
+        "p95": 695.3649999999998,
+        "max": 170300.0,
+        "mean": 280.58197596330274,
+        "zeros": 0,
+        "negatives": 6066
+      }
+    },
+    "ta_ppm": {
+      "dtype": "float64",
+      "null_count": 20509,
+      "null_rate": 0.742273,
+      "n_unique": 1354,
+      "unique_rate": 0.190142,
+      "numeric": {
+        "min": -3.0,
+        "p05": -3.0,
+        "median": -3.0,
+        "p95": 4.239,
+        "max": 32.71,
+        "mean": -1.6867946636708329,
+        "zeros": 0,
+        "negatives": 5612
+      }
+    },
+    "tb_ppm": {
+      "dtype": "float64",
+      "null_count": 20510,
+      "null_rate": 0.742309,
+      "n_unique": 505,
+      "unique_rate": 0.070927,
+      "numeric": {
+        "min": -20.0,
+        "p05": -20.0,
+        "median": -20.0,
+        "p95": 0.6666799999999988,
+        "max": 5.823,
+        "mean": -18.439668820224718,
+        "zeros": 0,
+        "negatives": 6588
+      }
+    },
+    "th_ppm": {
+      "dtype": "float64",
+      "null_count": 1975,
+      "null_rate": 0.07148,
+      "n_unique": 4038,
+      "unique_rate": 0.157396,
+      "numeric": {
+        "min": -49.0,
+        "p05": -2.0,
+        "median": 10.0,
+        "p95": 23.0,
+        "max": 6326.0,
+        "mean": 11.602298721496783,
+        "zeros": 0,
+        "negatives": 1362
+      }
+    },
+    "ti_ppm": {
+      "dtype": "float64",
+      "null_count": 2888,
+      "null_rate": 0.104524,
+      "n_unique": 6842,
+      "unique_rate": 0.276534,
+      "numeric": {
+        "min": -1923.0,
+        "p05": -200.0,
+        "median": 2869.5,
+        "p95": 7496.549999999974,
+        "max": 54993.0,
+        "mean": 3280.1133784657673,
+        "zeros": 0,
+        "negatives": 2260
+      }
+    },
+    "v_ppm": {
+      "dtype": "float64",
+      "null_count": 1918,
+      "null_rate": 0.069417,
+      "n_unique": 4912,
+      "unique_rate": 0.191039,
+      "numeric": {
+        "min": -32.0,
+        "p05": 10.68,
+        "median": 60.0,
+        "p95": 170.7,
+        "max": 3957.0,
+        "mean": 71.44771269057249,
+        "zeros": 0,
+        "negatives": 666
+      }
+    },
+    "w_ppm": {
+      "dtype": "float64",
+      "null_count": 14521,
+      "null_rate": 0.525552,
+      "n_unique": 270,
+      "unique_rate": 0.020597,
+      "numeric": {
+        "min": -30.0,
+        "p05": -30.0,
+        "median": -30.0,
+        "p95": 2.0,
+        "max": 732.3,
+        "mean": -15.635635441299872,
+        "zeros": 0,
+        "negatives": 12300
+      }
+    },
+    "y_ppm": {
+      "dtype": "float64",
+      "null_count": 15493,
+      "null_rate": 0.560731,
+      "n_unique": 62,
+      "unique_rate": 0.005108,
+      "numeric": {
+        "min": -5.0,
+        "p05": -5.0,
+        "median": 11.0,
+        "p95": 22.0,
+        "max": 148.0,
+        "mean": 9.815110818159347,
+        "zeros": 0,
+        "negatives": 2290
+      }
+    },
+    "yb_ppm": {
+      "dtype": "float64",
+      "null_count": 12557,
+      "null_rate": 0.45447,
+      "n_unique": 3340,
+      "unique_rate": 0.221588,
+      "numeric": {
+        "min": -957.0,
+        "p05": -3.0,
+        "median": 1.7,
+        "p95": 4.9,
+        "max": 103.4,
+        "mean": 0.745524076162675,
+        "zeros": 0,
+        "negatives": 5199
+      }
+    },
+    "zn_ppm": {
+      "dtype": "float64",
+      "null_count": 8396,
+      "null_rate": 0.303873,
+      "n_unique": 1505,
+      "unique_rate": 0.078247,
+      "numeric": {
+        "min": -200.0,
+        "p05": -200.0,
+        "median": 45.0,
+        "p95": 152.53499999999985,
+        "max": 45855.0,
+        "mean": 18.10099199334512,
+        "zeros": 0,
+        "negatives": 5680
+      }
+    },
+    "zr_ppm": {
+      "dtype": "float64",
+      "null_count": 21433,
+      "null_rate": 0.775715,
+      "n_unique": 424,
+      "unique_rate": 0.06842,
+      "numeric": {
+        "min": -2.0,
+        "p05": 37.0,
+        "median": 66.0,
+        "p95": 160.19999999999982,
+        "max": 2370.0,
+        "mean": 79.56185250927868,
+        "zeros": 0,
+        "negatives": 3
+      }
+    },
+    "po4_ppm": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "so4_ppm": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "methods": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 23,
+      "unique_rate": 0.000832,
+      "top_values": {
+        "SR1, SR2": 7578,
+        "LL1-DN, LL1-NA": 7113,
+        "SR1, SR2, SR3-AA;CA;FE;XU;XX": 5476,
+        "OR2, OR7": 4209,
+        "OR1, OR7": 1721,
+        "NONE": 625,
+        "SR3-AA;CA;FE;XU;XX": 617,
+        "LL1-DN": 127
+      }
+    },
+    "tapefile": {
+      "dtype": "str",
+      "null_count": 0,
+      "null_rate": 0.0,
+      "n_unique": 22,
+      "unique_rate": 0.000796,
+      "top_values": {
+        "XG0602.01": 7741,
+        "XG0012.04": 1883,
+        "XG0499.07": 1790,
+        "XG0012.05": 1742,
+        "XG0510.03": 1600,
+        "XG0510.04": 1537,
+        "XG0600.25": 1411,
+        "XG0149.01": 1216
+      }
+    },
+    "reformat": {
+      "dtype": "str",
+      "null_count": 3565,
+      "null_rate": 0.129026,
+      "n_unique": 172,
+      "unique_rate": 0.007147,
+      "top_values": {
+        "SUPPLEMENTAL ANALYSIS DATA ADDED FROM XG0602.04 RECORD: GOLD VALUE(-.01) ADDED BASED ON GJBX(82)-135 EXPLANATION:": 4712,
+        "GOLD VALUE(-.01) ADDED BASED ON GJBX(82)-135 EXPLANATION:": 2584,
+        "CONCENTRATIONS BELOW DETECTION LIMIT (NEGATIVE VALUES) ADDED FROM TABLE 2 IN GJBX-89(79):": 1568,
+        "STATE ADDED BASED ON COORDINATES: SAMPTYP(06) CHANGED BASED ON GJBX(82)-21 DESCRIPTION: SSAMPTYP ADDED FROM CORRESPONDING XG0499.07 RECORD:": 1564,
+        "SAMPTYP(06) CHANGED BASED ON GJBX(82)-23 DESCRIPTION: SSAMPTYP ADDED FROM CORRESPONDING XG0602.01 RECORD:": 1508,
+        "CONCENTRATIONS BELOW DETECTION LIMIT (NEGATIVE VALUES) ADDED FROM TABLE 2 IN GJBX-123(78):": 1490,
+        "CONCENTRATIONS BELOW DETECTION LIMIT (NEGATIVE VALUES) ADDED FROM TABLE 2 IN GJBX-39(79):": 1397,
+        "ASSUMED SUFFIX(S1) ADDED TO SRLID:": 1203
+      }
+    },
+    "coordprb": {
+      "dtype": "str",
+      "null_count": 20760,
+      "null_rate": 0.751357,
+      "n_unique": 1149,
+      "unique_rate": 0.167249,
+      "top_values": {
+        "COORDINATES CHANGED TO CORRESPONDING XG0499.07 VALUES TO RECOVER SIGNIFICANT DIGITS:": 2296,
+        "COORDINATES ADDED FROM CORRESPONDING XG0602.01 RECORD TO RECOVER SIGNIFICANT DIGITS:": 1577,
+        "LONGITUDE CHANGED TO CORRESPONDING XG0499.07 VALUE TO RECOVER SIGNIFICANT DIGITS:": 1140,
+        "LONGITUDE CHANGED TO VALUE IN CORRESPONDING XG0602.01 RECORD TO RECOVER SIGNIFICANT DIGITS:": 353,
+        "REDIGITIZED SAMPLE LOCATION: COORDINATES CONFIRMED - NO CHANGES MADE:": 145,
+        "LONGITUDE CHANGED TO VALUE FROM CORRESPONDING XG0499.07 RECORD TO RECOVER SIGNIFICANT DIGITS:": 100,
+        "MISSING COORDINATES:": 36,
+        "REDIGITIZED SAMPLE LOCATION: CHANGED LAT & LONG VALUES TO NEW COORDINATES: ORIGINAL VALUES - XG0602.01 LAT(0);LONG(0):": 7
+      }
+    },
+    "comments": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    },
+    "comment2": {
+      "dtype": "float64",
+      "null_count": 27630,
+      "null_rate": 1.0,
+      "n_unique": 0,
+      "unique_rate": 0.0
+    }
+  }
+}

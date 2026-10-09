@@ -1,0 +1,92 @@
+MINERAL PROSPECTIVITY
+How much of a prospectivity model's skill is spatial leakage?
+Project brief for an autonomous implementation agent
+
+Build Mineral Prospectivity in this project directory (/Users/ethannol/src/side-projects/mineral-prospectivity). This brief is self-contained. Make routine implementation decisions and carry the project through data acquisition, analysis, testing, and a finished report. Keep it small enough to explain in a five-minute interview.
+
+PURPOSE
+
+Ethan Levy is pursuing a data science role at a minerals company. His background includes geology/physics/mathematics, a master's in hydrology and water quality, environmental data work, production fraud-detection ML, and work since January 2025 as the founding engineer at a three-person AI startup. His portfolio already has a reference groundwater analysis, an LLM evaluation, a verification harness for analysis agents (cairn), and two statistics cheat sheets. What it lacks is a predictive model on a mining-domain problem where the modelling call a casual analyst gets wrong is made visible. This project is that piece.
+
+The central question: given regional stream-sediment geochemistry, how well can known mineral deposits of one commodity be predicted, and how much of the apparent skill disappears when the cross-validation respects spatial structure?
+
+Do not decide the answer in advance. If spatial block cross-validation barely moves the metrics, that is a valid finding. If the model has no skill beyond the base rate once leakage is removed, that is a valid finding too. The portfolio's value is in the quality of the investigation and the honesty of the reported skill.
+
+DATA
+
+Both sources are USGS public-domain products on mrdata.usgs.gov. Both were confirmed to respond on 2026-10-09; re-verify before downloading and record the response headers.
+
+1. NURE Hydrogeochemical and Stream Sediment Reconnaissance, sediment database. Whole-country CSV: https://mrdata.usgs.gov/nure/sediment/nuresed-csv.zip (about 37.6 MB zipped, 224 MB expanded, 397,609 samples, 145 fields). Field descriptions: https://mrdata.usgs.gov/nure/sediment/about.php and the metadata at https://mrdata.usgs.gov/metadata/nuresed.txt. Expect: multiple analytical laboratories and methods across quadrangles with different element suites and detection limits, censored values coded in a way the metadata describes (read it; do not assume negative means non-detect), sample media other than stream sediment mixed in, and uneven coverage because the program was never completed.
+
+2. Mineral Resources Data System (MRDS), flattened CSV: https://mrdata.usgs.gov/mrds/mrds-csv.zip (about 25 MB, last modified 2022; systematic updates ceased in 2011). Main page https://mrdata.usgs.gov/mrds/ links the commodity code list. Expect: development status values such as Producer, Past Producer, Prospect, Occurrence; multiple commodities per record; duplicate and near-duplicate sites; coordinates of varying precision.
+
+Record for each: URL, download date, HTTP headers, SHA-256 of the archive, row count, and the data dictionary. Keep the downloaded archives out of git if they exceed a few tens of MB; commit the deterministic regional extract instead, with the extraction script and the archive checksum so the extract is reproducible. Never modify the extract after writing it; all cleaning happens downstream with an exclusion log.
+
+REGION AND COMMODITY
+
+Choose after checking the data, not before. Candidates: Nevada with gold, Arizona with copper. The region must have (a) NURE sediment coverage over most of its area, (b) at least about 150 MRDS sites of the chosen commodity with development status Producer or Past Producer inside the covered area, and (c) a consistent set of elements measured by the same laboratory or method family across most samples. If neither candidate meets these, pick a region that does and record why. State the chosen region's NURE quadrangles, laboratories and element suite in the decisions log.
+
+LABELS AND UNIT OF ANALYSIS
+
+Decide and pre-register before fitting anything:
+
+- The unit of analysis. A regular grid cell (for example 2 to 5 km) with aggregated geochemistry is cleaner than individual samples because it removes within-cell pseudo-replication. The individual sample is acceptable if you say how repeated samples in one catchment are handled. Choose one and justify it.
+- Positives: units containing or within a stated distance of an MRDS site of the chosen commodity with status Producer or Past Producer. Prospects and occurrences are not positives. Decide whether they are excluded from negatives (they are unlabelled, not known-barren) and say so.
+- Negatives: everything else. State plainly that these are unlabelled, not known-barren, and what that does to interpretation of precision and calibration (positive-unlabelled learning). Do not pretend the negatives are verified.
+- Make the deposit-to-unit join explicit and checked. It must not multiply rows.
+
+FEATURES
+
+Stream-sediment concentrations are compositional. Use a log-ratio transform (centred log-ratio is fine for a tree model and for plotting; isometric log-ratio for a linear model) over a closed subcomposition of elements that are measured across the region. Document which elements, why, and how values below detection were handled for the transform (a labelled substitution for the transform is acceptable if the censored fraction is reported per element and elements above a stated censored fraction are dropped). Do not quietly fill missing with zero.
+
+Include the laboratory or quadrangle as a diagnostic covariate in one exploratory model to show whether the model can learn the lab instead of the geology. That is the second leakage trap and it is worth a paragraph.
+
+MODELS
+
+Two is enough: a regularised logistic regression on the transformed features for interpretability, and a gradient boosted tree model (scikit-learn HistGradientBoostingClassifier) for capacity. No hyperparameter search beyond a small fixed grid chosen inside the training folds. No deep learning.
+
+EVALUATION, WHICH IS THE POINT
+
+Run the same models under:
+
+1. Random stratified k-fold cross-validation.
+2. Spatial block cross-validation at several block sizes (for example 5, 10, 25, 50, 100 km), with blocks assigned to folds and the assignment repeated over several random fold allocations and block-grid offsets so a spread can be reported.
+3. Leave-one-quadrangle-out or leave-one-laboratory-group-out, as the batch-effect check.
+
+Justify the range of block sizes with an empirical measure of spatial autocorrelation of the target or of the random-CV residuals (a variogram or Moran's I against distance). Report AUC, average precision, and a capture curve: the fraction of held-out positives that fall inside the top 1, 5, 10 and 20 percent of units ranked by predicted probability. Report calibration in the held-out predictions. The headline figure is AUC (and average precision) against block size with the random-CV value as a reference line and the spread across repetitions shown.
+
+Report uncertainty from the repetitions. Do not report a single AUC to three decimals without a spread.
+
+Interpret which elements carry the signal and whether they are plausible pathfinders for the commodity. Say what the model would and would not be useful for. Do not present it as an exploration recommendation.
+
+BUILD THE PROJECT ON CAIRN
+
+Ethan's harness cairn lives at /Users/ethannol/src/side-projects/cairn (git repository; MIT). Use it: add it as a dependency installed from that path for local work and record the cairn commit hash in the README so a fresh checkout can pin it. Run `cairn init .` in this directory, fill `docs/prereg.md` with the question, unit of analysis, label definitions, feature set, cross-validation protocol, metrics and decision rule, and run `cairn freeze` BEFORE any model is fitted. Write one `scripts/NN_name.py` per step. Record every number that appears in the report with `cairn.record` and write the report as `report.tmpl.md` with `{{key}}` placeholders rendered by `cairn render`. Use `cairn.checked_merge` or `cairn.unique_key` for the deposit join. `cairn verify` must pass at the end, including the clean rerun. If any part of cairn blocks reasonable progress, work around it, do not edit cairn, and record exactly what blocked in docs/decisions.md. Read cairn's README, template CLAUDE.md and the analysis-workflow skill first. The pre-registration freeze is the strongest claim this project can make about its own honesty; respect it. Anything decided after the freeze is exploratory and must be labelled so.
+
+TESTS
+
+Focused pytest tests for the consequential pieces: closure and the log-ratio transform (clr rows sum to zero; recovery from a hand-built composition), block assignment (no unit appears in both train and test; blocks are contiguous; block sizes are as specified), the label join (no row multiplication; a planted duplicate MRDS site does not create two positives), censored handling (reported censored fractions match a fixture), the capture curve on a hand-computed example, and a synthetic leakage demonstration: generate a spatially autocorrelated field with no relationship to a target other than through space, show random k-fold reports skill and block CV at a block size above the correlation range does not.
+
+DELIVERABLES
+
+- README: question, setup, commands, data provenance, main findings with the headline numbers and the headline figure, what is not claimed, how AI was used (one paragraph, honest: built in a Claude Code session with Claude Fable 5.1 from this brief; the author reviewed the pre-registration, the tests and the findings).
+- src/ package (uv, hatchling, Python 3.12, pinned via uv.lock): acquire, extract, prepare, features, labels, cv, models, report; a scripts/ pipeline under cairn.
+- reports/: report.md rendered from the ledger, figures (coverage map of samples and deposits; censored fraction by element and lab; variogram or Moran's I; the AUC-versus-block-size headline; capture curves; calibration; a prospectivity map of held-out predictions with known deposits overlaid), tables.
+- docs/: decisions.md (every data and modelling decision with the reason, including region choice and all post-freeze exploratory additions), prereg.md (frozen), walkthrough.md (five-minute script with time marks, every number from the ledger), resume_bullet.md (measured results only).
+- A note in docs/ describing how this task could become a cairn trap task (a leakage sensor for spatial data). Do not build it.
+
+Everything deterministic must run from a fresh checkout without network access given the committed extract. Seed everything.
+
+WORKING RULES
+
+Work only in this project directory. Do not read or modify any employer systems or data. Do not create a GitHub repository, deploy anything, or contact anyone. Initialise a git repository here with local config user.name "Ethan Levy" and user.email "ethannol@gmail.com", branch main, a .gitignore that excludes .venv, caches, and the large downloaded archives, and commit in a few sensible steps as the work lands. End every commit message with the line: Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>. Do not put any other name on anything.
+
+Machine restrictions on this MacBook: do not launch Chrome, Chromium, Playwright, browser rendering, screenshots, or dev servers. Figures written directly by Matplotlib are fine. Keep compute modest; this fits in minutes on a laptop. Do not detach background jobs. No LLM calls are needed for this project.
+
+Use `python -I` when running anything that reads a freshly downloaded archive before it has been extracted and inspected.
+
+COMPLETION STANDARD
+
+A bounded, honest study: a pre-registered protocol frozen before fitting, a reproducible extract, a leakage comparison with spread, a capture curve a geologist would understand, and limitations attached to the claims they affect. A reader should be able to follow each headline number from the extract through a script to the ledger to the report.
+
+Proceed autonomously on routine choices. Finish with: the runnable commands, where the artifacts are, the actual headline numbers with spread, the region and commodity chosen and why, anything in cairn that blocked and how you worked around it, and anything left unfinished, stated narrowly.

@@ -1,0 +1,106 @@
+{
+  "region": {
+    "name": "Nevada",
+    "nure_filter": {
+      "state": "NV",
+      "smpmedia": "SEDIMENT"
+    },
+    "mrds_filter": {
+      "state": "Nevada",
+      "country": "United States"
+    }
+  },
+  "note": "Archives are not committed (see data/archive/ in .gitignore). The extract is written once and never modified; verify with `python -m prospectivity.extract --check`.",
+  "sources": {
+    "nure": {
+      "key": "nure",
+      "description": "USGS NURE Hydrogeochemical and Stream Sediment Reconnaissance, sediment database, whole-country CSV (public domain)",
+      "url": "https://mrdata.usgs.gov/nure/sediment/nuresed-csv.zip",
+      "archive": "data/archive/nure/nuresed-csv.zip",
+      "downloaded_at_utc": "Fri, 09 Oct 2026 21:27:09 GMT",
+      "http_headers": {
+        "status": "HTTP/2 200",
+        "date": "Fri, 09 Oct 2026 21:27:09 GMT",
+        "content-type": "application/zip",
+        "content-length": "39431276",
+        "accept-ranges": "bytes",
+        "access-control-allow-origin": "*",
+        "etag": "\"259ac6c-5092d826e5380\"",
+        "last-modified": "Mon, 01 Dec 2014 20:32:30 GMT",
+        "p3p": "CP=\"NON DSP LAW CUR ADMa DEVa STP OUR STA UNI COM NAV INT\", policyref=\"/w3c/p3p.xml\"",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "BYPASS",
+        "cf-ray": "a48077bb2b34ed40-SJC"
+      },
+      "archive_bytes": 39431276,
+      "archive_sha256": "3c3c4830c6529ed2c50b539f99a39ca834298df154a23968c30ca7d3626ac900",
+      "csv_member": "nuresed.csv",
+      "meta_member": "nurehssr.met",
+      "archive_members": {
+        "nuresed.csv": 235207556,
+        "nurehssr.met": 66038
+      },
+      "csv_sha256": "9446847cf661ec6677a3d4c9e11f736b7f8c3ab34b0a4d9aaff99e4724a86072",
+      "csv_rows": 397609,
+      "meta_sha256": "7b32cc10dcb951d42bca96104378549a3b1a111c7c77576f341a778ecc2ae8d7"
+    },
+    "mrds": {
+      "key": "mrds",
+      "description": "USGS Mineral Resources Data System (MRDS), flattened CSV (public domain)",
+      "url": "https://mrdata.usgs.gov/mrds/mrds-csv.zip",
+      "archive": "data/archive/mrds/mrds-csv.zip",
+      "downloaded_at_utc": "Fri, 09 Oct 2026 21:27:16 GMT",
+      "http_headers": {
+        "status": "HTTP/2 200",
+        "date": "Fri, 09 Oct 2026 21:27:16 GMT",
+        "content-type": "application/zip",
+        "content-length": "25791223",
+        "accept-ranges": "bytes",
+        "access-control-allow-origin": "*",
+        "etag": "\"1898af7-5e6eefd78cbfe\"",
+        "last-modified": "Tue, 23 Aug 2022 21:10:12 GMT",
+        "p3p": "CP=\"NON DSP LAW CUR ADMa DEVa STP OUR STA UNI COM NAV INT\", policyref=\"/w3c/p3p.xml\"",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "BYPASS",
+        "cf-ray": "a48077e549a3cd6e-SJC"
+      },
+      "archive_bytes": 25791223,
+      "archive_sha256": "31be4baaa86b082787bc74989146183db21badf7157db39b3f0a6fe0b38a5477",
+      "csv_member": "mrds.csv",
+      "meta_member": "mrds.met",
+      "archive_members": {
+        "mrds.csv": 137239557,
+        "mrds.met": 148639
+      },
+      "csv_sha256": "ac1b70dcc8159ad4a691739f62c13ec738af3453f4840db7fafe4ed1c1253e37",
+      "csv_rows": 304632,
+      "meta_sha256": "1848b57dd33d6f8cd3d2235b4c31e25e11d69a025cce6c95d5e963ff004f187a"
+    }
+  },
+  "extracts": {
+    "nure": {
+      "file": "data/raw/nure_nv_sediment.csv",
+      "filter": {
+        "state": "NV",
+        "smpmedia": "SEDIMENT"
+      },
+      "rows": 27630,
+      "sha256": "6fe27c3c557bdeb9bdc5af6e9fc84028668513bd2256cde6b9f4e30d6da78f80",
+      "metadata_file": "data/raw/nurehssr.met"
+    },
+    "mrds": {
+      "file": "data/raw/mrds_nv.csv",
+      "filter": {
+        "state": "Nevada",
+        "country": "United States"
+      },
+      "rows": 15408,
+      "sha256": "1d83773132f0b867823cb3ada2911dfc23fc846b4e795094d526bf792bbf3f7f",
+      "metadata_file": "data/raw/mrds.met"
+    }
+  }
+}
