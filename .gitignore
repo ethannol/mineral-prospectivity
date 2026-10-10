@@ -6,4 +6,5 @@ __pycache__/
 .cairn/runs/
 .cairn/stop-*.count
 .cairn/verify.json
-data/archive/*.zip
+data/archive/**/*.zip
+data/derived/*.parquet

@@ -1,0 +1,6 @@
+step,rows_before,rows_after,excluded,reason
+stream_only,27630,17518,10112,"sampsrc != STREAM (soil, playa, lake, other)"
+coords,17518,17513,5,missing latitude or longitude
+methods_none,17513,16993,520,methods == NONE (no analyses in record)
+one_record_per_sample,16993,15746,1247,additional record for a sample (replicate or second analysis); lowest rec_no kept
+complete_suite,15746,13771,1975,missing (or zero) value in at least one suite element

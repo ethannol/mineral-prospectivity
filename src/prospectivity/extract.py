@@ -25,7 +25,6 @@ import io
 import json
 import sys
 import zipfile
-from pathlib import Path
 
 from prospectivity.acquire import (
     MANIFEST_PATH,
@@ -75,7 +74,8 @@ def build(write: bool = True) -> dict:
         "region": REGION,
         "note": (
             "Archives are not committed (see data/archive/ in .gitignore). The extract "
-            "is written once and never modified; verify with `python -m prospectivity.extract --check`."
+            "is written once and never modified; verify with "
+            "`python -m prospectivity.extract --check`."
         ),
         "sources": {},
         "extracts": {},
@@ -118,10 +118,14 @@ def check() -> list[str]:
     for key in SOURCES:
         a, b = fresh["extracts"][key], committed["extracts"][key]
         if a["sha256"] != b["sha256"] or a["rows"] != b["rows"]:
-            problems.append(f"{key}: recomputed extract differs ({a['rows']} rows, {a['sha256'][:12]})")
+            problems.append(
+                f"{key}: recomputed extract differs ({a['rows']} rows, {a['sha256'][:12]})"
+            )
         on_disk = sha256_of(PROJECT_ROOT / b["file"])
         if on_disk != b["sha256"]:
-            problems.append(f"{key}: {b['file']} on disk {on_disk[:12]} != manifest {b['sha256'][:12]}")
+            problems.append(
+                f"{key}: {b['file']} on disk {on_disk[:12]} != manifest {b['sha256'][:12]}"
+            )
         if fresh["sources"][key]["archive_sha256"] != committed["sources"][key]["archive_sha256"]:
             problems.append(f"{key}: archive sha256 differs from manifest")
     return problems

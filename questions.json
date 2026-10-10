@@ -3,30 +3,30 @@
     {
       "id": "q1",
       "text": "For the gradient boosted model, what is the AUC (and average precision) under random stratified 5-fold CV versus spatial block CV at the reference block size, each with its spread over 5 repetitions, and what is the difference?",
-      "status": "open",
-      "answer_keys": [],
-      "notes": ""
+      "status": "answered",
+      "answer_keys": ["cv.hgb.random.auc.mean", "cv.hgb.random.auc.std", "cv.hgb.random.auc.min", "cv.hgb.random.auc.max", "cv.hgb.ref.auc.mean", "cv.hgb.ref.auc.std", "cv.hgb.ref.auc.min", "cv.hgb.ref.auc.max", "cv.hgb.random.ap.mean", "cv.hgb.ref.ap.mean", "headline.hgb.auc_inflation", "headline.hgb.ap_inflation", "headline.hgb.leakage_label", "headline.reference_block_km"],
+      "notes": "Reference block size fixed by the frozen Moran's I rule (scripts/40). Leakage label 'substantial' by the frozen decision rule."
     },
     {
       "id": "q2",
       "text": "Under spatial block CV at the reference block size, does either model rank held-out gold-producer cells better than chance (mean AUC at least 0.60 and minimum over repetitions above 0.55), and what fraction of held-out positives fall in the top 5 and top 10 percent of cells?",
-      "status": "open",
-      "answer_keys": [],
-      "notes": ""
+      "status": "answered",
+      "answer_keys": ["headline.hgb.skill_beyond_chance", "headline.lr.skill_beyond_chance", "headline.hgb.skill_label", "cv.hgb.ref.auc.mean", "cv.hgb.ref.auc.min", "cv.lr.ref.auc.mean", "cv.lr.ref.auc.min", "cv.hgb.ref.capture_5.mean", "cv.hgb.ref.capture_10.mean", "cv.hgb.ref.capture_10.min", "cv.hgb.ref.capture_10.max", "headline.hgb.largest_block_with_skill_km"],
+      "notes": "Neither model meets the frozen skill rule at the reference size; the boosted model meets it up to the block size recorded in headline.hgb.largest_block_with_skill_km."
     },
     {
       "id": "q3",
       "text": "Is the analytical batch learnable: how does AUC change when the method family is left out entirely (leave-one-family-out), and when it is added as a covariate (exploratory)?",
-      "status": "open",
-      "answer_keys": [],
-      "notes": ""
+      "status": "answered",
+      "answer_keys": ["batch.hgb.lofo.auc", "batch.lr.lofo.auc", "batch.hgb.lofo.auc_LL", "batch.hgb.lofo.auc_SR", "batch.hgb.lofo.auc_OR", "batch.hgb.lofo_minus_blockref", "batch.hgb.lab_trap_present", "batch.lr.lab_trap_present", "explore.labcov.hgb.random_gain", "explore.labcov.lr.random_gain", "explore.labcov.hgb.random.auc.mean", "explore.labcov.hgb.blockref.auc.mean"],
+      "notes": "Leave-one-family-out is confirmatory; the covariate model is exploratory and labelled so in the report."
     },
     {
       "id": "q4",
       "text": "Which elements carry the signal in the held-out predictions, and are they plausible gold pathfinders or lithological proxies? (exploratory)",
-      "status": "open",
-      "answer_keys": [],
-      "notes": ""
+      "status": "exploratory",
+      "answer_keys": ["explore.lr_most_positive_elements", "explore.lr_most_negative_elements", "explore.contrast_most_enriched", "explore.contrast_most_depleted", "explore.top_elements_hgb", "explore.top_element_hgb_importance"],
+      "notes": "Sc, V, Fe up and La, Ce, Th down is a lithological (mafic versus felsic) contrast, not a pathfinder signature; no pathfinder element survived the pre-registered suite rule."
     }
   ]
 }
