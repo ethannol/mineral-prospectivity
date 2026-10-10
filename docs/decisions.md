@@ -118,3 +118,87 @@ after the freeze are marked POST-FREEZE and are exploratory.
   mine is a different exploration target); a distance buffer around sites (a cell
   edge is already up to 3.5 km from a site; a buffer would blur the unit and
   multiply cells per site).
+
+## 2026-10-09 Session note: the cairn hooks were not active
+
+- Evidence: the Claude Code session that built this project ran with its working
+  directory one level above the project, so the `.claude/settings.json` hooks that
+  `cairn init` installs (protected-path denial, script lint on save, the Stop gate)
+  did not fire. The sensors were run by hand instead: `cairn verify --quick` during
+  development and the full `cairn verify` with clean re-execution before finishing.
+  The freeze, the ledger and the clean rerun do not depend on the hooks.
+
+## 2026-10-09 POST-FREEZE Tables live in reports/tables, figures in reports/figures
+
+- Evidence: the brief asks for `reports/` to hold the report, figures and tables;
+  cairn's template puts them under `artifacts/`. Scripts write tables to
+  `reports/tables/` and figures to `reports/figures/`; `artifacts/` keeps the ledger
+  (`numbers.json`) and the checks log. No result changes.
+
+## 2026-10-09 POST-FREEZE Reporting threshold for per-quadrangle AUC
+
+- Evidence: the pre-registration defines the leave-one-quadrangle-out folds (every
+  quadrangle with at least one cell of each class is a held-out fold) but not which
+  per-quadrangle AUCs to summarise. `scripts/60_batch.py` reports the range and
+  median over quadrangles with at least ten cells of each class (recorded in
+  `batch.loqo.min_per_class`); the pooled AUC uses every tested quadrangle. The
+  full per-quadrangle table is `reports/tables/loqo_quads.csv`.
+
+## 2026-10-09 POST-FREEZE Exploratory additions (labelled in the report)
+
+- Method family as a covariate (`scripts/60_batch.py`): three one-hot indicators
+  appended to the pre-registered features, same models, same grids, random and
+  reference-block CV. Purpose: the second leakage trap named in the pre-registration.
+- Ambiguous cells kept as negatives (`scripts/60_batch.py`): boosted model only,
+  random and reference-block CV.
+- Element interpretation (`scripts/70_interpret.py`): class contrast of mean CLR;
+  logistic coefficients mapped from ILR to CLR space from a fit on all confirmatory
+  cells with C chosen by a block-grouped inner split; held-out permutation
+  importance of the boosted model on the reference-block folds of repetition zero.
+  Fitting on all cells is for interpretation only; no reported metric comes from it.
+- Residual correlogram (`scripts/70_interpret.py`): Moran's I of the random-CV
+  residuals of the boosted model, repetition zero.
+- Calibration tables and the prospectivity map use repetition zero of each scheme;
+  the metrics and their spreads use all five repetitions.
+
+## 2026-10-09 What blocked in cairn and the workarounds (nothing in cairn was edited)
+
+1. `cairn freeze` hashes everything under `data/raw/`, so gitignored archives there
+   would fail `cairn verify` on a fresh checkout. Archives moved to `data/archive/`.
+2. `cairn.censored_values` recognises `<limit` text and marker words, not the NURE
+   convention of a negative number. `scripts/10_prepare.py` renders each suite
+   element as `<limit` text before calling the sensor so the censored count is logged.
+3. The script lint (C102) flags any `.join(` attribute call, including
+   `", ".join(...)` on strings. String joins moved to `prospectivity.util.commas`.
+4. `cairn render` writes to one configured path; `report = "reports/report.md"`
+   was set once in `cairn.toml` before the freeze (entry above).
+5. `cairn.load_ledger()` returns a snapshot; a script that records a value and then
+   reads it back from that snapshot gets a KeyError. Scripts keep values they need
+   in local variables and read the ledger only for earlier steps' results.
+6. README, walkthrough and resume bullet are not covered by `cairn render`, but the
+   brief requires every number in them to come from the ledger. `scripts/90_render_docs.py`
+   renders `*.tmpl.md` versions of those documents with `cairn.numbers.render`
+   and fails on any unresolved placeholder, so they are regenerated on every run.
+
+## 2026-10-09 POST-FREEZE No wall-clock values in the ledger
+
+- Evidence: the first full `cairn verify` failed on exactly one of 648 ledger keys,
+  `cv.runtime_s` (107 versus 111 seconds between the run and the clean
+  re-execution); every other value reproduced within tolerance. Runtime is not a
+  result and cannot be reproduced, so it is no longer recorded; the report says
+  "a few minutes" without a number.
+
+## 2026-10-09 Git history rewritten once to remove the archives
+
+- Evidence: the `.gitignore` pattern `data/archive/*.zip` did not match the archives
+  in `data/archive/nure/` and `data/archive/mrds/`, so the first commit (7074233)
+  contained both zip files (65 MB). The brief requires the archives to stay out of
+  git. With no remote, the four commits present at the time were
+  rewritten with `git filter-branch` to drop the two zip blobs only; messages, dates
+  and every other file are unchanged, and the pattern is now `data/archive/**/*.zip`.
+- Consequence: `.cairn/frozen.json` records `git_head` 707423380a2a5582370f3940747eb592fe0609df,
+  the pre-rewrite hash of the commit that introduced the pre-registration. That
+  hash no longer resolves in this repository. The freeze record was not regenerated
+  because its timestamp and the prereg SHA-256 it holds are the evidence that the
+  plan was frozen before any model was fitted; `cairn verify` checks the hash, not
+  the commit id. The `.headers` files (HTTP response headers) stay tracked.

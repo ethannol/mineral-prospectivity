@@ -1,26 +1,110 @@
-# Title
+# How much of a prospectivity model's skill is spatial leakage?
 
-_Rendered by `cairn render`; every figure below is a ledger value. Do not edit `report.md`._
+_Rendered by `cairn render`; every figure below is a ledger value produced by a script under `scripts/`. Do not edit `reports/report.md`._
 
 ## Question
 
+Given NURE stream-sediment geochemistry over Nevada aggregated to {{features.cell_km:g}} km grid cells, how well can cells containing a known gold producer (an MRDS site with development status Producer or Past Producer and gold as a primary commodity) be distinguished from the other sampled cells, and how much of the apparent skill under random k-fold cross-validation disappears under spatial block cross-validation at block sizes above the autocorrelation range of the target?
+
+**Answer.** Under random {{cv.k_outer}}-fold cross-validation the gradient boosted model reaches an AUC of {{cv.hgb.random.auc.mean:.3f}} (standard deviation {{cv.hgb.random.auc.std:.3f}}, range {{cv.hgb.random.auc.min:.3f}} to {{cv.hgb.random.auc.max:.3f}} over {{cv.n_repetitions}} repetitions). Under spatial block cross-validation with {{headline.reference_block_km:g}} km blocks, the reference size fixed by the pre-registered autocorrelation rule, the same model reaches {{cv.hgb.ref.auc.mean:.3f}} (standard deviation {{cv.hgb.ref.auc.std:.3f}}, range {{cv.hgb.ref.auc.min:.3f}} to {{cv.hgb.ref.auc.max:.3f}}). The drop of {{headline.hgb.auc_inflation:.3f}} is "{{headline.hgb.leakage_label}}" by the frozen decision rule, and the block-CV result falls under the frozen rule's reading "{{headline.hgb.skill_label}}". Only {{headline.hgb.pct_skill_surviving:.0f}} percent of the random-CV skill above chance survives. The logistic regression behaves the same way ({{cv.lr.random.auc.mean:.3f}} random, {{cv.lr.ref.auc.mean:.3f}} at {{headline.reference_block_km:g}} km, drop {{headline.lr.auc_inflation:.3f}}, "{{headline.lr.leakage_label}}"). The leave-one-analytical-family-out check is worse still (pooled AUC {{batch.hgb.lofo.auc:.3f}} for the boosted model), so part of what the random-CV model learns is the laboratory, not the geology.
+
 ## Data and comparability
 
-Rows profiled: {{profile.rows}}. State what one row represents, which rows were excluded and why.
+- **NURE sediment extract** (`data/raw/nure_nv_sediment.csv`): {{extract.nure_rows}} Nevada sediment records across {{extract.nure_quads}} one-by-two-degree quadrangles. One row is one analytical record of one sample. Population filters in order: stream sediment only ({{prep.n_excluded_not_stream}} soil, playa, lake and other records excluded), missing coordinates ({{prep.n_excluded_no_coords}}), no analyses in the record ({{prep.n_excluded_no_methods}}), additional records of the same sample ({{prep.n_excluded_extra_records}}; the lowest record number is kept), leaving {{prep.n_stream_samples}} stream-sediment samples. The analytical method family (LL {{prep.n_family_LL}}, SR {{prep.n_family_SR}}, OR {{prep.n_family_OR}} samples) is the batch variable: Savannah River samples were analysed either by its own neutron-activation methods or by Oak Ridge methods, with different element suites, so the DOE laboratory is not the right grouping.
+- **Element suite.** The pre-registered rule (non-null in at least {{prep.suite_rule_min_nonnull_pct:g}} percent of records and censored in at most {{prep.suite_rule_max_censored_pct:g}} percent of non-null records in every family) selects exactly the ten pre-registered elements ({{prep.suite_elements}}; rule matches the pre-registration: {{prep.suite_rule_matches_prereg}}). Complete-case on the suite excludes {{prep.n_excluded_incomplete_suite}} samples, leaving {{prep.n_samples}} (LL {{prep.n_samples_LL}}, SR {{prep.n_samples_SR}}, OR {{prep.n_samples_OR}}), collected {{prep.sampdat_min}} to {{prep.sampdat_max}}. This is a lithological suite: the classic Nevada gold pathfinders (As, Sb, Hg, W, Tl) are absent or heavily censored in at least one family and could not be used. That limitation applies to every result below.
+- **Censoring.** NURE reports a value below the detection limit as a negative number whose magnitude is the limit. Across the ten elements and {{prep.n_samples}} samples {{prep.censored_pct_overall:.2f}} percent of values are censored; the worst case is {{prep.censored_pct_max_element}} in the {{prep.censored_pct_max_family}} family at {{prep.censored_pct_max:.1f}} percent (`fig2_censoring.png` and `reports/tables/censored_fraction_suite.csv`). Censored values are substituted by {{features.substitution_factor:g}} times the limit for the log-ratio transform; this is a labelled substitution, not an estimate, and the per-element shares are reported so a reader can judge it. No zero values occur in the suite ({{prep.n_zero_values_suite}}), and nothing is filled with zero.
+- **MRDS extract** (`data/raw/mrds_nv.csv`): {{labels.n_sites}} Nevada site records, none without coordinates. {{labels.n_positive_sites}} are positive sites ({{labels.n_positive_sites_past_producer}} past producers, {{labels.n_positive_sites_producer}} producers), at {{labels.n_positive_sites_unique_coords}} distinct coordinates, so duplicate records exist and are absorbed by the cell-level join. {{labels.n_ambiguous_sites}} further sites mention gold at some rank or status (prospects, occurrences, by-product gold) and define the ambiguous cells.
+- **Units.** {{features.n_cells}} cells of {{features.cell_km:g}} km on UTM zone 11N (EPSG {{features.utm_epsg}}) hold at least one retained sample (median {{features.samples_per_cell_median:g}} samples per cell, maximum {{features.samples_per_cell_max}}; {{features.pct_cells_single_sample:.0f}} percent of cells hold a single sample). A cell's features are the mean of its samples' centred log-ratio vectors. {{labels.n_cells_ambiguous}} ambiguous cells are excluded from the confirmatory population, leaving {{labels.n_cells}} cells with {{labels.n_positive_cells}} positives (base rate {{labels.base_rate_pct:.2f}} percent). Only {{labels.pct_positive_sites_in_sampled_cells:.0f}} percent of positive sites fall in a cell that has any retained sample; the rest cannot be scored and are not in the population. The deposit-to-cell join is a per-cell count merged one-to-one; the row count is unchanged and a planted duplicate of every positive site leaves the labels unchanged ({{labels.planted_duplicate_ok}}). Negatives are unlabelled cells, not known-barren ground.
 
 ## Method
 
-Pre-registered quantity, unit of analysis, handling of censored or missing values.
+Everything in this section was frozen in `docs/prereg.md` before any model was fitted. Two models: an L2 logistic regression on isometric log-ratio coordinates (C chosen from a four-value grid) and a `HistGradientBoostingClassifier` on centred log-ratios (four-entry grid over learning rate and leaf count, fixed iteration budget). Selection uses an inner {{cv.k_inner}}-fold split of the training folds under the same grouping scheme as the outer split; standardisation is fitted on training folds only. Schemes: random stratified {{cv.k_outer}}-fold ({{cv.n_repetitions}} repetitions); square spatial blocks of {{moran.block_sizes_km}} km with a random grid offset and random block-to-fold allocation ({{cv.n_repetitions}} repetitions per size); leave-one-method-family-out; leave-one-quadrangle-out. Metrics are computed on the pooled out-of-fold predictions of each repetition, so the spread is across repetitions. The whole protocol runs in a few minutes on one thread.
 
-## Result
+## Results
 
-State the result with its uncertainty, e.g. "median {{result.median:.2f}} {{result.unit}}
-(n = {{result.n}} wells, bootstrap 95% interval {{result.ci_low:.2f}} to {{result.ci_high:.2f}})".
+### Spatial autocorrelation sets the reference block size
 
-## Caveats next to the claims they affect
+Moran's I of the cell label is {{moran.i_bin1:.2f}} for cell pairs within {{moran.i_bin1_hi_km:g}} km, {{moran.i_bin2:.2f}} in the next {{moran.bin_km:g}} km bin, and first falls below {{moran.threshold:g}} at {{moran.range_km:g}} km (`fig3_moran.png`; null expectation {{moran.expected_null:.4f}}). By the pre-registered rule the reference block size is the smallest size in the grid at or above that distance: {{moran.reference_block_km:g}} km. Known gold producers in Nevada cluster in districts tens of kilometres across; a random split puts cells from the same district on both sides of the split.
+
+### Headline: random versus spatial cross-validation (`fig4_auc_vs_block_size.png`)
+
+| Model | Scheme | AUC mean | sd | min | max | AP mean | AP min | AP max |
+|---|---|---|---|---|---|---|---|---|
+| Boosted trees | random {{cv.k_outer}}-fold | {{cv.hgb.random.auc.mean:.3f}} | {{cv.hgb.random.auc.std:.3f}} | {{cv.hgb.random.auc.min:.3f}} | {{cv.hgb.random.auc.max:.3f}} | {{cv.hgb.random.ap.mean:.3f}} | {{cv.hgb.random.ap.min:.3f}} | {{cv.hgb.random.ap.max:.3f}} |
+| Boosted trees | blocks, five km ({{cv.hgb.block5.n_blocks_mean:.0f}} blocks, one cell each) | {{cv.hgb.block5.auc.mean:.3f}} | {{cv.hgb.block5.auc.std:.3f}} | {{cv.hgb.block5.auc.min:.3f}} | {{cv.hgb.block5.auc.max:.3f}} | {{cv.hgb.block5.ap.mean:.3f}} | {{cv.hgb.block5.ap.min:.3f}} | {{cv.hgb.block5.ap.max:.3f}} |
+| Boosted trees | blocks, ten km ({{cv.hgb.block10.n_blocks_mean:.0f}} blocks) | {{cv.hgb.block10.auc.mean:.3f}} | {{cv.hgb.block10.auc.std:.3f}} | {{cv.hgb.block10.auc.min:.3f}} | {{cv.hgb.block10.auc.max:.3f}} | {{cv.hgb.block10.ap.mean:.3f}} | {{cv.hgb.block10.ap.min:.3f}} | {{cv.hgb.block10.ap.max:.3f}} |
+| Boosted trees | blocks, twenty-five km ({{cv.hgb.block25.n_blocks_mean:.0f}} blocks) | {{cv.hgb.block25.auc.mean:.3f}} | {{cv.hgb.block25.auc.std:.3f}} | {{cv.hgb.block25.auc.min:.3f}} | {{cv.hgb.block25.auc.max:.3f}} | {{cv.hgb.block25.ap.mean:.3f}} | {{cv.hgb.block25.ap.min:.3f}} | {{cv.hgb.block25.ap.max:.3f}} |
+| Boosted trees | blocks, fifty km ({{cv.hgb.block50.n_blocks_mean:.0f}} blocks) | {{cv.hgb.block50.auc.mean:.3f}} | {{cv.hgb.block50.auc.std:.3f}} | {{cv.hgb.block50.auc.min:.3f}} | {{cv.hgb.block50.auc.max:.3f}} | {{cv.hgb.block50.ap.mean:.3f}} | {{cv.hgb.block50.ap.min:.3f}} | {{cv.hgb.block50.ap.max:.3f}} |
+| Boosted trees | blocks, one hundred km ({{cv.hgb.block100.n_blocks_mean:.0f}} blocks, reference) | {{cv.hgb.block100.auc.mean:.3f}} | {{cv.hgb.block100.auc.std:.3f}} | {{cv.hgb.block100.auc.min:.3f}} | {{cv.hgb.block100.auc.max:.3f}} | {{cv.hgb.block100.ap.mean:.3f}} | {{cv.hgb.block100.ap.min:.3f}} | {{cv.hgb.block100.ap.max:.3f}} |
+| Logistic (ILR) | random {{cv.k_outer}}-fold | {{cv.lr.random.auc.mean:.3f}} | {{cv.lr.random.auc.std:.3f}} | {{cv.lr.random.auc.min:.3f}} | {{cv.lr.random.auc.max:.3f}} | {{cv.lr.random.ap.mean:.3f}} | {{cv.lr.random.ap.min:.3f}} | {{cv.lr.random.ap.max:.3f}} |
+| Logistic (ILR) | blocks, ten km | {{cv.lr.block10.auc.mean:.3f}} | {{cv.lr.block10.auc.std:.3f}} | {{cv.lr.block10.auc.min:.3f}} | {{cv.lr.block10.auc.max:.3f}} | {{cv.lr.block10.ap.mean:.3f}} | {{cv.lr.block10.ap.min:.3f}} | {{cv.lr.block10.ap.max:.3f}} |
+| Logistic (ILR) | blocks, twenty-five km | {{cv.lr.block25.auc.mean:.3f}} | {{cv.lr.block25.auc.std:.3f}} | {{cv.lr.block25.auc.min:.3f}} | {{cv.lr.block25.auc.max:.3f}} | {{cv.lr.block25.ap.mean:.3f}} | {{cv.lr.block25.ap.min:.3f}} | {{cv.lr.block25.ap.max:.3f}} |
+| Logistic (ILR) | blocks, fifty km | {{cv.lr.block50.auc.mean:.3f}} | {{cv.lr.block50.auc.std:.3f}} | {{cv.lr.block50.auc.min:.3f}} | {{cv.lr.block50.auc.max:.3f}} | {{cv.lr.block50.ap.mean:.3f}} | {{cv.lr.block50.ap.min:.3f}} | {{cv.lr.block50.ap.max:.3f}} |
+| Logistic (ILR) | blocks, one hundred km (reference) | {{cv.lr.block100.auc.mean:.3f}} | {{cv.lr.block100.auc.std:.3f}} | {{cv.lr.block100.auc.min:.3f}} | {{cv.lr.block100.auc.max:.3f}} | {{cv.lr.block100.ap.mean:.3f}} | {{cv.lr.block100.ap.min:.3f}} | {{cv.lr.block100.ap.max:.3f}} |
+
+The base rate, and so the average precision of a random ranking, is {{cv.base_rate_pct:.2f}} percent. The AUC falls monotonically with block size from ten km upward for both models. The five-km rows are a check, not a result: {{headline.random_vs_block5_note}}. The random-CV and reference block-CV ranges do not overlap for either model (boosted: {{headline.hgb.ranges_overlap}}; logistic: {{headline.lr.ranges_overlap}}). Average precision drops by {{headline.hgb.ap_inflation:.3f}} (boosted) and {{headline.lr.ap_inflation:.3f}} (logistic).
+
+Caveat attached to this claim: the spread shown is across repetitions of the fold allocation and grid offset, which is the right spread for "how stable is this estimate under the protocol" but is not a confidence interval for the population AUC, and at {{headline.reference_block_km:g}} km the folds hold only {{cv.hgb.block100.n_blocks_mean:.0f}} blocks, so the block-CV spread is wider for structural reasons.
+
+### Capture and calibration (`fig5_capture.png`, `fig6_calibration.png`)
+
+Under random CV the boosted model's top ten percent of cells capture {{cv.hgb.random.capture_10.mean:.1%}} of held-out producer cells (range {{cv.hgb.random.capture_10.min:.1%}} to {{cv.hgb.random.capture_10.max:.1%}}), a lift of {{headline.hgb.capture_10_lift_random:.2f}} over chance; the top five percent capture {{cv.hgb.random.capture_5.mean:.1%}} and the top twenty percent {{cv.hgb.random.capture_20.mean:.1%}}. At the reference block size the top ten percent capture {{cv.hgb.ref.capture_10.mean:.1%}} (range {{cv.hgb.ref.capture_10.min:.1%}} to {{cv.hgb.ref.capture_10.max:.1%}}; lift {{headline.hgb.capture_10_lift_ref:.2f}}), the top five percent {{cv.hgb.ref.capture_5.mean:.1%}}, the top one percent {{cv.hgb.ref.capture_1.mean:.1%}} and the top twenty percent {{cv.hgb.ref.capture_20.mean:.1%}}. A geologist reading `fig5_capture.png` sees a curve that sits above the diagonal but not far above it: following the model's top decile would roughly double the hit rate of a random walk across sampled cells under random CV, and somewhat less than that once the model is asked about districts it has not seen.
+
+Calibration: held-out probabilities span a narrow band (random CV decile means from {{calib.hgb.random.pred_range_pct}} percent; block CV from {{calib.hgb.ref.pred_range_pct}} percent). In the top decile the observed producer rate is {{calib.hgb.random.top_decile_obs_rate_pct:.1f}} percent under random CV against a mean prediction of {{calib.hgb.random.top_decile_mean_pred_pct:.1f}} percent, and {{calib.hgb.ref.top_decile_obs_rate_pct:.1f}} percent against {{calib.hgb.ref.top_decile_mean_pred_pct:.1f}} percent under block CV; Brier scores are {{cv.hgb.random.brier.mean:.4f}} and {{cv.hgb.ref.brier.mean:.4f}}. Caveat attached: because negatives are unlabelled, the observed rates are lower bounds on the true rate of mineralised ground, and so is every precision figure here.
+
+### Batch effects: the second leakage trap
+
+Leave-one-method-family-out, which asks the model to score samples from an analytical family it never saw, gives a pooled AUC of {{batch.hgb.lofo.auc:.3f}} (boosted) and {{batch.lr.lofo.auc:.3f}} (logistic); the difference from the reference block-CV value (leave-one-family-out minus block CV) is {{batch.hgb.lofo_minus_blockref:.3f}} and {{batch.lr.lofo_minus_blockref:.3f}}. Within each held-out family the ranking is slightly better than chance (boosted: LL {{batch.hgb.lofo.auc_LL:.3f}}, SR {{batch.hgb.lofo.auc_SR:.3f}}, OR {{batch.hgb.lofo.auc_OR:.3f}}); the pooled value is lower because the families' score distributions are offset, which is what a laboratory effect looks like. Leave-one-quadrangle-out over {{batch.loqo.n_quads_tested}} quadrangles gives pooled AUC {{batch.hgb.loqo.auc:.3f}} (boosted) and {{batch.lr.loqo.auc:.3f}} (logistic); among the {{batch.hgb.loqo.n_quads_reported}} quadrangles with at least {{batch.loqo.min_per_class}} cells of each class the per-quadrangle AUC runs from {{batch.hgb.loqo.auc_quad_min:.3f}} to {{batch.hgb.loqo.auc_quad_max:.3f}} (median {{batch.hgb.loqo.auc_quad_median:.3f}}) for the boosted model, with {{batch.hgb.loqo.n_quads_below_half}} quadrangles below one half. The frozen batch-trap rule (gain of at least two hundredths of AUC from adding the family, or a leave-one-family-out AUC at least five hundredths below block CV) is met for both models: boosted {{batch.hgb.lab_trap_present}}, logistic {{batch.lr.lab_trap_present}}.
+
+### Decision rule outcomes (pre-registered)
+
+- Leakage: **{{headline.hgb.leakage_label}}** for the boosted model (drop {{headline.hgb.auc_inflation:.3f}}), **{{headline.lr.leakage_label}}** for the logistic regression (drop {{headline.lr.auc_inflation:.3f}}).
+- Skill under spatial CV at the reference size: **{{headline.hgb.skill_label}}** (boosted, mean {{cv.hgb.ref.auc.mean:.3f}}, minimum {{cv.hgb.ref.auc.min:.3f}}; the rule required a mean of at least six tenths and a minimum above fifty-five hundredths). The largest block size at which the rule is still met is {{headline.hgb.largest_block_with_skill_km}} km for the boosted model and {{headline.lr.largest_block_with_skill_km}} km for the logistic regression, which is where this geochemistry stops generalising.
+- Batch trap: **present** for both models.
+- Abstention thresholds were not triggered ({{labels.abstain}}).
 
 ## Exploratory findings (not pre-registered)
 
+### Which elements carry the signal, and are they pathfinders?
+
+Table `reports/tables/element_signal.csv`. In a logistic fit on all cells (C = {{explore.lr_C_selected:g}}), the largest positive centred-log-ratio coefficients belong to {{explore.lr_most_positive_elements}} (largest {{explore.lr_coef_max_element}}, {{explore.lr_coef_max:.2f}}) and the most negative to {{explore.lr_most_negative_elements}} (most negative {{explore.lr_coef_min_element}}, {{explore.lr_coef_min:.2f}}). The simple class contrast agrees: relative to the other cells, producer cells are enriched in {{explore.contrast_most_enriched}} (largest standardised difference {{explore.contrast_max_d:.2f}}) and depleted in {{explore.contrast_most_depleted}} (most negative {{explore.contrast_min_d:.2f}}). Held-out permutation importance for the boosted model (block CV at the reference size, selected configuration: {{explore.hgb_config_selected}}) is small for every element: the top three are {{explore.top_elements_hgb}}, with the leading element worth {{explore.top_element_hgb_importance:.3f}} AUC and the third {{explore.third_element_hgb_importance:.3f}}.
+
+Interpretation: a signature of more Sc, V and Fe and less La, Ce and Th is a mafic-to-intermediate versus felsic lithology contrast, not a hydrothermal one. It is consistent with many Nevada producers sitting in andesitic volcanic terrain (Walker Lane epithermal districts) rather than in rhyolite- or granite-dominated catchments, and it says nothing about the ore itself. None of these ten elements is a gold pathfinder; the elements that are (As, Sb, Hg, W, Tl) were not measured consistently across the analytical families and were excluded by the pre-registered rule. The honest reading is that this model learns regional lithology, and lithology is spatially smooth, which is exactly why random CV overstates it.
+
+### The laboratory as a feature
+
+Adding the three method-family indicators as covariates raises random-CV AUC from {{cv.hgb.random.auc.mean:.3f}} to {{explore.labcov.hgb.random.auc.mean:.3f}} for the boosted model (gain {{explore.labcov.hgb.random_gain:.3f}}) and from {{cv.lr.random.auc.mean:.3f}} to {{explore.labcov.lr.random.auc.mean:.3f}} for the logistic regression (gain {{explore.labcov.lr.random_gain:.3f}}). At the reference block size the lab-covariate models score {{explore.labcov.hgb.blockref.auc.mean:.3f}} and {{explore.labcov.lr.blockref.auc.mean:.3f}}. The family indicator is a cheap proxy for region (each family covers a contiguous set of quadrangles) and for the family's own base rate (LL {{labels.base_rate_pct_LL:.1f}}, SR {{labels.base_rate_pct_SR:.1f}}, OR {{labels.base_rate_pct_OR:.1f}} percent of cells positive). A model that is allowed to see the lab learns the lab; a casual analyst who one-hot-encodes "laboratory" as a nuisance covariate and validates with random folds would report a better model that generalises worse.
+
+### Sensitivity: ambiguous cells kept as negatives
+
+Keeping the {{labels.n_cells_ambiguous}} ambiguous cells (gold prospects, occurrences and by-product producers) as negatives ({{explore.ambneg.n_cells}} cells, base rate {{explore.ambneg.base_rate_pct:.2f}} percent) lowers the boosted model's AUC to {{explore.ambneg.hgb.random.auc.mean:.3f}} under random CV and {{explore.ambneg.hgb.blockref.auc.mean:.3f}} at the reference block size: the conclusion does not depend on the exclusion.
+
+### Residual autocorrelation
+
+Moran's I of the random-CV residuals is {{explore.moran_residual_bin1:.2f}} in the first distance bin and {{explore.moran_residual_bin2:.2f}} in the second, compared with {{moran.i_bin1:.2f}} and {{moran.i_bin2:.2f}} for the label (`fig3_moran.png`): the features explain little of the spatial structure of the target, which is what the block-CV result says in another way.
+
+## What this model would and would not be useful for
+
+It would be useful as a demonstration of why spatial block cross-validation is mandatory for prospectivity work, as a baseline against which a pathfinder-bearing dataset can be judged, and as a map of regional lithological contrast. It would not be useful as an exploration ranking: at the reference block size its ranking is within reach of chance on the pre-registered rule, its probabilities sit in a narrow band around the base rate, the negatives are unlabelled, and {{labels.pct_positive_sites_in_sampled_cells:.0f}} percent coverage of positive sites by sampled cells means a third of known producers are outside the population altogether. This report is not an exploration recommendation.
+
+## Caveats next to the claims they affect
+
+- Element suite (every result): no gold pathfinder elements; the NURE program's labs measured different suites, and the cross-family common set is lithological.
+- Units (every result): {{features.pct_cells_single_sample:.0f}} percent of cells hold one sample, so cell features are noisy; NURE coordinates are NAD27 and MRDS WGS84, with the shift below the cell size and ignored.
+- Labels (precision, calibration): positive-unlabelled; MRDS has duplicate and near-duplicate sites and its coordinates vary in precision; systematic MRDS updates stopped in 2011.
+- Spread (headline): across repetitions of the protocol, not a confidence interval; the reference block size is set by one correlogram threshold chosen before modelling.
+- Batch check: the three families also differ in region and in sieve fraction, so "the lab" cannot be separated from "the region" with these data.
+
+## Figures
+
+1. `reports/figures/fig1_coverage.png`: retained samples by method family and gold producers.
+2. `reports/figures/fig2_censoring.png`: share below detection limit by element and family.
+3. `reports/figures/fig3_moran.png`: Moran's I correlogram of the label and of the residuals.
+4. `reports/figures/fig4_auc_vs_block_size.png`: the headline, AUC and average precision against block size with the random-CV reference.
+5. `reports/figures/fig5_capture.png`: capture curves, random versus block CV.
+6. `reports/figures/fig6_calibration.png`: reliability of held-out predictions.
+7. `reports/figures/fig7_prospectivity_map.png`: held-out predictions with known producers overlaid.
+
 ## Decision log
 
-See `docs/decisions.md`.
+See `docs/decisions.md` for every data and modelling decision, including the post-freeze exploratory additions.
