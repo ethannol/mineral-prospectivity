@@ -21,7 +21,7 @@
       "hi": "cv.hgb.random.auc.max"
     },
     {
-      "label": "AUC, 100 km spatial blocks (boosted trees)",
+      "label": "AUC, {{moran.reference_block_km:.0f}} km spatial blocks (boosted trees)",
       "value": "cv.hgb.block100.auc.mean",
       "fmt": ".3f",
       "lo": "cv.hgb.block100.auc.min",
@@ -151,7 +151,6 @@
     "0.05": "Frozen operational leakage threshold, not an observed score.",
     "0.60": "Frozen useful-skill AUC threshold, not an observed score.",
     "0.55": "Frozen minimum-repetition AUC threshold, not an observed score.",
-    "100": "Frozen reference block protocol named in label; measured selection is ledger-backed.",
     "10": "Fixed top-ranked-area reporting fraction, not captured-positive result."
   },
   "strict_numbers": true
