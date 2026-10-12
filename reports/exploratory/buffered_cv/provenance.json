@@ -1,0 +1,14 @@
+{
+  "exploratory": true,
+  "source_revision": "183fc248b69af0ae37cf3dc1822313073b8bc857",
+  "repetitions": 3,
+  "buffer_km": [
+    0.0,
+    5.0,
+    10.0,
+    25.0
+  ],
+  "block_km": 100,
+  "seed_rule": "rep index",
+  "baseline_unchanged": true
+}

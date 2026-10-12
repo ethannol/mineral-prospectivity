@@ -45,6 +45,24 @@
       "value": "cv.base_rate_pct",
       "fmt": ".1f",
       "unit": "%"
+    },
+    {
+      "label": "Exploratory matched AUC, 0 km buffer (boosted trees)",
+      "value": "buffered.hgb.buffer0.auc_mean",
+      "lo": "buffered.hgb.buffer0.auc_min",
+      "hi": "buffered.hgb.buffer0.auc_max",
+      "fmt": ".3f",
+      "spread_kind": "repetition range",
+      "note": "Mean {{buffered.hgb.buffer0.removed_mean:.0f}} training cells excluded per outer fold; inner tuning also buffered."
+    },
+    {
+      "label": "Exploratory matched AUC, 25 km buffer (boosted trees)",
+      "value": "buffered.hgb.buffer25.auc_mean",
+      "lo": "buffered.hgb.buffer25.auc_min",
+      "hi": "buffered.hgb.buffer25.auc_max",
+      "fmt": ".3f",
+      "spread_kind": "repetition range",
+      "note": "Mean {{buffered.hgb.buffer25.removed_mean:.0f}} training cells excluded per outer fold; inner tuning also buffered."
     }
   ],
   "finding": [
@@ -121,6 +139,10 @@
     {
       "title": "Exploratory distance-buffer sensitivity",
       "path": "docs/buffered-validation.md"
+    },
+    {
+      "title": "Recorded distance-buffer sensitivity results",
+      "path": "docs/buffered-results.md"
     }
   ],
   "verification": {
@@ -151,7 +173,51 @@
     "0.05": "Frozen operational leakage threshold, not an observed score.",
     "0.60": "Frozen useful-skill AUC threshold, not an observed score.",
     "0.55": "Frozen minimum-repetition AUC threshold, not an observed score.",
-    "10": "Fixed top-ranked-area reporting fraction, not captured-positive result."
+    "10": "Fixed top-ranked-area reporting fraction, not captured-positive result.",
+    "0": "Chosen distance-buffer radius in the supplementary sensitivity, not an observed result.",
+    "25": "Chosen distance-buffer radius in the supplementary sensitivity, not an observed result."
   },
-  "strict_numbers": true
+  "strict_numbers": true,
+  "sources": {
+    "buffered.hgb.buffer0.auc_mean": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer0.auc_mean"
+    },
+    "buffered.hgb.buffer0.auc_min": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer0.auc_min"
+    },
+    "buffered.hgb.buffer0.auc_max": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer0.auc_max"
+    },
+    "buffered.hgb.buffer0.removed_mean": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer0.removed_mean"
+    },
+    "buffered.hgb.buffer25.auc_mean": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer25.auc_mean"
+    },
+    "buffered.hgb.buffer25.auc_min": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer25.auc_min"
+    },
+    "buffered.hgb.buffer25.auc_max": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer25.auc_max"
+    },
+    "buffered.hgb.buffer25.removed_mean": {
+      "source": "json_file",
+      "path": "reports/exploratory/buffered_cv/summary.json",
+      "key": "models.hgb.buffer25.removed_mean"
+    }
+  }
 }
