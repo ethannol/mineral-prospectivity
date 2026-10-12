@@ -149,7 +149,8 @@
     "frozen": ".cairn/frozen.json",
     "tests": "tests.n_passed",
     "harness": "cairn",
-    "verify": "pass"
+    "verify": "pass",
+    "artifact": "reports/check-evidence.json"
   },
   "data": [
     "USGS NURE HSSR stream-sediment database, Nevada extract",
