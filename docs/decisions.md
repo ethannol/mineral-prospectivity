@@ -202,3 +202,8 @@ after the freeze are marked POST-FREEZE and are exploratory.
   because its timestamp and the prereg SHA-256 it holds are the evidence that the
   plan was frozen before any model was fitted; `cairn verify` checks the hash, not
   the commit id. The `.headers` files (HTTP response headers) stay tracked.
+
+
+## 2026-10-12: exploratory distance buffers and reproducible harness checkout
+
+The frozen block CV does not guarantee distance across touching block edges. Added a separate nested buffer sensitivity (same baseline models/grids, 100 km blocks, training exclusion at 0/5/10/25 km; both inner and outer folds buffered). Configurations are supplementary choices, not changes to preregistration. The primary ledger and frozen rule labels remain unchanged; presentation now distinguishes the useful-skill rule from a test of chance and explicitly preserves analytical-family/region confounding. A dedicated `cairn-mineral-baseline` checkout pins the original harness without modifying any shared cairn tree. Supplementary source revision, metrics and attrition are recorded separately under `reports/exploratory/`.
