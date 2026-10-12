@@ -8,3 +8,6 @@ __pycache__/
 .cairn/verify.json
 data/archive/**/*.zip
 data/derived/*.parquet
+
+# Supplementary preparation bookkeeping; never the published primary ledger
+reports/exploratory/preparation/

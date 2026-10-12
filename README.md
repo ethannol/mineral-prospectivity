@@ -4,7 +4,7 @@ _Rendered from `README.tmpl.md` by `scripts/90_render_docs.py`; every number is 
 
 **Question.** Given USGS NURE stream-sediment geochemistry over Nevada aggregated to 5 km cells, how well can cells containing a known gold producer (MRDS Producer or Past Producer with gold as a primary commodity) be predicted, and how much of that apparent skill disappears when cross-validation respects spatial structure?
 
-**Answer.** Most of it. The gradient boosted model's AUC is 0.638 under random 5-fold CV (range 0.627 to 0.648 over 5 repetitions) and 0.571 under 100 km spatial block CV (range 0.554 to 0.590), the block size the pre-registered autocorrelation rule selected. Average precision falls from 0.172 to 0.142 against a base rate of 9.7 percent. Under the frozen decision rule the leakage is "substantial" and at the reference block size there is "no demonstrated skill beyond chance once spatial structure is respected". Leaving out an entire analytical laboratory family is worse still (AUC 0.488), and adding the family as a covariate raises random-CV AUC by 0.031: the model can learn the lab. The elements that carry what signal there is (V, Sc, Fe up; La, Ce, Th down) describe lithology, not ore.
+**Answer.** Most of it. The gradient boosted model's AUC is 0.638 under random 5-fold CV (range 0.627 to 0.648 over 5 repetitions) and 0.571 under 100 km spatial block CV (range 0.554 to 0.590), the block size the pre-registered autocorrelation rule selected. Average precision falls from 0.172 to 0.142 against a base rate of 9.7 percent. Under the frozen decision rule the leakage is "substantial" and at the reference block size the frozen label is "no demonstrated skill beyond chance once spatial structure is respected": the model fails the useful-skill threshold, not a statistical test of equality to chance. Leaving out an entire analytical laboratory family is worse still (AUC 0.488), and adding the family as a covariate raises random-CV AUC by 0.031: the model can learn the lab. The elements that carry what signal there is (V, Sc, Fe up; La, Ce, Th down) describe lithology, not ore.
 
 ![AUC and average precision against spatial block size](reports/figures/fig4_auc_vs_block_size.png)
 
@@ -26,14 +26,18 @@ Population: 5707 cells, 553 positive, from 13771 stream-sediment samples and 285
 
 ## Setup
 
-Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The harness is Ethan's
-[cairn](../cairn) (MIT), installed as an editable path dependency from the sibling
-directory `../cairn` at commit `a184e0732989373856039dea2919ccd96a88e8b1`; a fresh checkout should
-place cairn there at that commit (`git -C ../cairn checkout a184e0732989373856039dea2919ccd96a88e8b1`).
+Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The baseline harness
+is cairn commit `a184e0732989373856039dea2919ccd96a88e8b1`. Install it in a
+dedicated sibling without changing an existing cairn checkout:
 
 ```bash
-uv sync                        # creates .venv with pinned versions from uv.lock (dev group included)
+python3 scripts/bootstrap.py
 ```
+
+This stdlib helper clones the pinned SDK into its dedicated folder and runs
+`uv sync --locked --group dev`. It refuses an existing checkout with a different
+HEAD or any uncommitted changes, and never resets or checks out an existing
+working tree. The project lockfile pins the remaining packages.
 
 ## Commands
 
@@ -87,3 +91,6 @@ docs/                prereg.md (frozen), decisions.md, data_dictionary.md, walkt
                      resume_bullet.md, cairn_trap_task.md
 tests/               pytest suite
 ```
+
+
+The frozen skill label is an operational decision rule, not a statistical test that AUC equals 0.5. The reference model does not meet the pre-registered useful-skill threshold. Family indicators are learnable proxies for both method and region; this dataset cannot isolate a causal laboratory effect. See [the supplementary distance-buffer sensitivity](docs/buffered-validation.md) for a stricter exploratory separation check.

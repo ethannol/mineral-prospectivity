@@ -10,7 +10,7 @@ resolution-markers = [
 [[package]]
 name = "cairn"
 version = "0.1.0"
-source = { editable = "../cairn" }
+source = { editable = "../cairn-mineral-baseline" }
 dependencies = [
     { name = "numpy" },
     { name = "pandas" },
@@ -198,7 +198,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "cairn", editable = "../cairn" },
+    { name = "cairn", editable = "../cairn-mineral-baseline" },
     { name = "matplotlib", specifier = ">=3.9" },
     { name = "numpy", specifier = ">=2.0" },
     { name = "pandas", specifier = ">=2.2" },

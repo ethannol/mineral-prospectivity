@@ -4,7 +4,7 @@ _Rendered from `README.tmpl.md` by `scripts/90_render_docs.py`; every number is 
 
 **Question.** Given USGS NURE stream-sediment geochemistry over Nevada aggregated to {{features.cell_km:g}} km cells, how well can cells containing a known gold producer (MRDS Producer or Past Producer with gold as a primary commodity) be predicted, and how much of that apparent skill disappears when cross-validation respects spatial structure?
 
-**Answer.** Most of it. The gradient boosted model's AUC is {{cv.hgb.random.auc.mean:.3f}} under random {{cv.k_outer}}-fold CV (range {{cv.hgb.random.auc.min:.3f}} to {{cv.hgb.random.auc.max:.3f}} over {{cv.n_repetitions}} repetitions) and {{cv.hgb.ref.auc.mean:.3f}} under {{headline.reference_block_km:g}} km spatial block CV (range {{cv.hgb.ref.auc.min:.3f}} to {{cv.hgb.ref.auc.max:.3f}}), the block size the pre-registered autocorrelation rule selected. Average precision falls from {{cv.hgb.random.ap.mean:.3f}} to {{cv.hgb.ref.ap.mean:.3f}} against a base rate of {{cv.base_rate_pct:.1f}} percent. Under the frozen decision rule the leakage is "{{headline.hgb.leakage_label}}" and at the reference block size there is "{{headline.hgb.skill_label}}". Leaving out an entire analytical laboratory family is worse still (AUC {{batch.hgb.lofo.auc:.3f}}), and adding the family as a covariate raises random-CV AUC by {{explore.labcov.hgb.random_gain:.3f}}: the model can learn the lab. The elements that carry what signal there is ({{explore.contrast_most_enriched}} up; {{explore.contrast_most_depleted}} down) describe lithology, not ore.
+**Answer.** Most of it. The gradient boosted model's AUC is {{cv.hgb.random.auc.mean:.3f}} under random {{cv.k_outer}}-fold CV (range {{cv.hgb.random.auc.min:.3f}} to {{cv.hgb.random.auc.max:.3f}} over {{cv.n_repetitions}} repetitions) and {{cv.hgb.ref.auc.mean:.3f}} under {{headline.reference_block_km:g}} km spatial block CV (range {{cv.hgb.ref.auc.min:.3f}} to {{cv.hgb.ref.auc.max:.3f}}), the block size the pre-registered autocorrelation rule selected. Average precision falls from {{cv.hgb.random.ap.mean:.3f}} to {{cv.hgb.ref.ap.mean:.3f}} against a base rate of {{cv.base_rate_pct:.1f}} percent. Under the frozen decision rule the leakage is "{{headline.hgb.leakage_label}}" and at the reference block size the frozen label is "{{headline.hgb.skill_label}}": the model fails the useful-skill threshold, not a statistical test of equality to chance. Leaving out an entire analytical laboratory family is worse still (AUC {{batch.hgb.lofo.auc:.3f}}), and adding the family as a covariate raises random-CV AUC by {{explore.labcov.hgb.random_gain:.3f}}: the model can learn the lab. The elements that carry what signal there is ({{explore.contrast_most_enriched}} up; {{explore.contrast_most_depleted}} down) describe lithology, not ore.
 
 ![AUC and average precision against spatial block size](reports/figures/fig4_auc_vs_block_size.png)
 
@@ -26,14 +26,18 @@ Population: {{labels.n_cells}} cells, {{labels.n_positive_cells}} positive, from
 
 ## Setup
 
-Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The harness is Ethan's
-[cairn](../cairn) (MIT), installed as an editable path dependency from the sibling
-directory `../cairn` at commit `a184e0732989373856039dea2919ccd96a88e8b1`; a fresh checkout should
-place cairn there at that commit (`git -C ../cairn checkout a184e0732989373856039dea2919ccd96a88e8b1`).
+Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The baseline harness
+is cairn commit `a184e0732989373856039dea2919ccd96a88e8b1`. Install it in a
+dedicated sibling without changing an existing cairn checkout:
 
 ```bash
-uv sync                        # creates .venv with pinned versions from uv.lock (dev group included)
+python3 scripts/bootstrap.py
 ```
+
+This stdlib helper clones the pinned SDK into its dedicated folder and runs
+`uv sync --locked --group dev`. It refuses an existing checkout with a different
+HEAD or any uncommitted changes, and never resets or checks out an existing
+working tree. The project lockfile pins the remaining packages.
 
 ## Commands
 
@@ -87,3 +91,6 @@ docs/                prereg.md (frozen), decisions.md, data_dictionary.md, walkt
                      resume_bullet.md, cairn_trap_task.md
 tests/               pytest suite
 ```
+
+
+The frozen skill label is an operational decision rule, not a statistical test that AUC equals 0.5. The reference model does not meet the pre-registered useful-skill threshold. Family indicators are learnable proxies for both method and region; this dataset cannot isolate a causal laboratory effect. See [the supplementary distance-buffer sensitivity](docs/buffered-validation.md) for a stricter exploratory separation check.
