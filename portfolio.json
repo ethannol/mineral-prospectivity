@@ -144,5 +144,15 @@
   ],
   "links": {
     "Repository": "https://github.com/ethannol/mineral-prospectivity"
-  }
+  },
+  "numeric_constants": {
+    "5": "Pre-registered random CV outer-fold count and 5 km grid resolution, not an observed result.",
+    "0.5": "The theoretical AUC of chance ranking, not an estimated score.",
+    "0.05": "Frozen operational leakage threshold, not an observed score.",
+    "0.60": "Frozen useful-skill AUC threshold, not an observed score.",
+    "0.55": "Frozen minimum-repetition AUC threshold, not an observed score.",
+    "100": "Frozen reference block protocol named in label; measured selection is ledger-backed.",
+    "10": "Fixed top-ranked-area reporting fraction, not captured-positive result."
+  },
+  "strict_numbers": true
 }
