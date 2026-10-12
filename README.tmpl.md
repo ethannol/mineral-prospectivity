@@ -26,14 +26,19 @@ Population: {{labels.n_cells}} cells, {{labels.n_positive_cells}} positive, from
 
 ## Setup
 
-Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The harness is Ethan's
-[cairn](../cairn) (MIT), installed as an editable path dependency from the sibling
-directory `../cairn` at commit `a184e0732989373856039dea2919ccd96a88e8b1`; a fresh checkout should
-place cairn there at that commit (`git -C ../cairn checkout a184e0732989373856039dea2919ccd96a88e8b1`).
+Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The baseline harness
+is cairn commit `a184e0732989373856039dea2919ccd96a88e8b1`. Install it in a
+dedicated sibling without changing an existing cairn checkout:
 
 ```bash
-uv sync                        # creates .venv with pinned versions from uv.lock (dev group included)
+git clone https://github.com/ethannol/cairn.git ../cairn-mineral-baseline
+git -C ../cairn-mineral-baseline checkout --detach a184e0732989373856039dea2919ccd96a88e8b1
+uv sync
 ```
+
+The path dependency points to this dedicated checkout. If it already exists,
+verify its HEAD matches the hash above before syncing; do not reset a shared
+working tree. The project lockfile pins the remaining packages.
 
 ## Commands
 
@@ -87,3 +92,6 @@ docs/                prereg.md (frozen), decisions.md, data_dictionary.md, walkt
                      resume_bullet.md, cairn_trap_task.md
 tests/               pytest suite
 ```
+
+
+The frozen skill label is an operational decision rule, not a statistical test that AUC equals 0.5. The reference model does not meet the pre-registered useful-skill threshold. Family indicators are learnable proxies for both method and region; this dataset cannot isolate a causal laboratory effect. See [the supplementary distance-buffer sensitivity](docs/buffered-validation.md) for a stricter exploratory separation check.

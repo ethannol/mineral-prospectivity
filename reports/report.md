@@ -6,7 +6,7 @@ _Rendered by `cairn render`; every figure below is a ledger value produced by a 
 
 Given NURE stream-sediment geochemistry over Nevada aggregated to 5 km grid cells, how well can cells containing a known gold producer (an MRDS site with development status Producer or Past Producer and gold as a primary commodity) be distinguished from the other sampled cells, and how much of the apparent skill under random k-fold cross-validation disappears under spatial block cross-validation at block sizes above the autocorrelation range of the target?
 
-**Answer.** Under random 5-fold cross-validation the gradient boosted model reaches an AUC of 0.638 (standard deviation 0.008, range 0.627 to 0.648 over 5 repetitions). Under spatial block cross-validation with 100 km blocks, the reference size fixed by the pre-registered autocorrelation rule, the same model reaches 0.571 (standard deviation 0.015, range 0.554 to 0.590). The drop of 0.068 is "substantial" by the frozen decision rule, and the block-CV result falls under the frozen rule's reading "no demonstrated skill beyond chance once spatial structure is respected". Only 51 percent of the random-CV skill above chance survives. The logistic regression behaves the same way (0.610 random, 0.559 at 100 km, drop 0.051, "substantial"). The leave-one-analytical-family-out check is worse still (pooled AUC 0.488 for the boosted model), so part of what the random-CV model learns is the laboratory, not the geology.
+**Answer.** Under random 5-fold cross-validation the gradient boosted model reaches an AUC of 0.638 (standard deviation 0.008, range 0.627 to 0.648 over 5 repetitions). Under spatial block cross-validation with 100 km blocks, the reference size fixed by the pre-registered autocorrelation rule, the same model reaches 0.571 (standard deviation 0.015, range 0.554 to 0.590). The drop of 0.068 is "substantial" by the frozen decision rule, and the block-CV result falls under the frozen rule's reading "no demonstrated skill beyond chance once spatial structure is respected". Only 51 percent of the random-CV skill above chance survives. The logistic regression behaves the same way (0.610 random, 0.559 at 100 km, drop 0.051, "substantial"). The leave-one-analytical-family-out check is worse still (pooled AUC 0.488 for the boosted model), showing distribution shift associated with analytical family and region; these effects are confounded.
 
 ## Data and comparability
 
@@ -108,3 +108,6 @@ It would be useful as a demonstration of why spatial block cross-validation is m
 ## Decision log
 
 See `docs/decisions.md` for every data and modelling decision, including the post-freeze exploratory additions.
+
+
+The frozen skill label is an operational decision rule, not a statistical test that AUC equals 0.5. The reference model does not meet the pre-registered useful-skill threshold. Family indicators are learnable proxies for both method and region; this dataset cannot isolate a causal laboratory effect. See [the supplementary distance-buffer sensitivity](docs/buffered-validation.md) for a stricter exploratory separation check.
