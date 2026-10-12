@@ -5,13 +5,47 @@
   "status": "complete",
   "question": "Given regional stream-sediment geochemistry, how well can known gold producers in Nevada be predicted, and how much of that skill is spatial leakage?",
   "one_liner": "USGS NURE stream-sediment chemistry and MRDS gold producers on a 5 km grid, two models, and the same evaluation run under random folds, spatial blocks of five sizes, and leave-one-laboratory-out.",
-  "ledger": {"type": "cairn", "path": "artifacts/numbers.json"},
+  "aim": "Measure how much of a prospectivity model's apparent skill at distinguishing grid cells containing known gold producers, from NURE stream-sediment geochemistry over Nevada, survives cross-validation that respects spatial autocorrelation and analytical batch.",
+  "hypothesis": "Random k-fold cross-validation overstates skill because neighbouring cells share geology. Pre-registered rule: leakage is substantial if random-fold AUC exceeds block-fold AUC at the reference block size by at least 0.05 with non-overlapping ranges; the model has skill only if block-fold AUC is at least 0.60 and its minimum over repetitions exceeds 0.55.",
+  "conclusion": "Leakage is substantial by the pre-registered rule, and no skill beyond chance is demonstrated once spatial structure is respected. Holding out one analytical method family gives below-chance AUC, so the laboratory was learnable. The only elements consistent across method families are lithological; the surviving signal is a mafic-versus-felsic contrast, not a mineralisation signature.",
+  "ledger": {
+    "type": "cairn",
+    "path": "artifacts/numbers.json"
+  },
   "headline": [
-    {"label": "AUC, random 5-fold (boosted trees)", "value": "cv.hgb.random.auc.mean", "fmt": ".3f", "lo": "cv.hgb.random.auc.min", "hi": "cv.hgb.random.auc.max"},
-    {"label": "AUC, 100 km spatial blocks (boosted trees)", "value": "cv.hgb.block100.auc.mean", "fmt": ".3f", "lo": "cv.hgb.block100.auc.min", "hi": "cv.hgb.block100.auc.max"},
-    {"label": "AUC, leave-one-method-family-out", "value": "batch.hgb.lofo.auc", "fmt": ".3f", "note": "below chance: the model learned the lab"},
-    {"label": "Positives captured in top 10% of cells, blocks", "value": "cv.hgb.block100.capture_10.mean", "fmt": ".0%", "lo": "cv.hgb.block100.capture_10.min", "hi": "cv.hgb.block100.capture_10.max"},
-    {"label": "Base rate of producer cells", "value": "cv.base_rate_pct", "fmt": ".1f", "unit": "%"}
+    {
+      "label": "AUC, random 5-fold (boosted trees)",
+      "value": "cv.hgb.random.auc.mean",
+      "fmt": ".3f",
+      "lo": "cv.hgb.random.auc.min",
+      "hi": "cv.hgb.random.auc.max"
+    },
+    {
+      "label": "AUC, 100 km spatial blocks (boosted trees)",
+      "value": "cv.hgb.block100.auc.mean",
+      "fmt": ".3f",
+      "lo": "cv.hgb.block100.auc.min",
+      "hi": "cv.hgb.block100.auc.max"
+    },
+    {
+      "label": "AUC, leave-one-method-family-out",
+      "value": "batch.hgb.lofo.auc",
+      "fmt": ".3f",
+      "note": "below chance: the model learned the lab"
+    },
+    {
+      "label": "Positives captured in top 10% of cells, blocks",
+      "value": "cv.hgb.block100.capture_10.mean",
+      "fmt": ".0%",
+      "lo": "cv.hgb.block100.capture_10.min",
+      "hi": "cv.hgb.block100.capture_10.max"
+    },
+    {
+      "label": "Base rate of producer cells",
+      "value": "cv.base_rate_pct",
+      "fmt": ".1f",
+      "unit": "%"
+    }
   ],
   "finding": [
     "Nevada was chosen because all of its NURE quadrangles were analysed by two laboratories with a shared element suite and it has thousands of MRDS gold producer sites. Even so, the samples split into three analytical method families, and the only elements measured consistently across all three are lithological. The classic gold pathfinders, arsenic, antimony, mercury and tungsten, were absent or heavily censored in at least one family and were excluded by the pre-registered consistency rule before any model was fitted.",
@@ -19,18 +53,48 @@
     "The batch trap is real. Holding out one analytical method family at a time gives an AUC of {{batch.hgb.lofo.auc:.3f}}, below chance, and adding the family as a covariate buys {{explore.labcov.hgb.random_gain:.3f}} AUC under random folds. The elements that carry signal describe a mafic-versus-felsic lithology contrast, not a mineralisation signature, and the report makes no exploration recommendation."
   ],
   "traps": [
-    {"id": "spatial-leakage", "how": "Random folds gave an AUC of {{cv.hgb.random.auc.mean:.3f}}; blocks sized from the autocorrelation range gave {{cv.hgb.block100.auc.mean:.3f}}. The headline figure is AUC against block size."},
-    {"id": "batch-effects", "how": "Three analytical method families with different element suites; leave-one-family-out AUC is {{batch.hgb.lofo.auc:.3f}}, and the family is a learnable covariate."},
-    {"id": "censoring", "how": "NURE codes non-detects by a sign convention; censored fractions were reported per element and family, and elements above the pre-registered fraction were dropped rather than filled."},
-    {"id": "join-fanout", "how": "MRDS has duplicate and near-duplicate sites; the deposit-to-cell join is checked so a planted duplicate cannot create two positives."}
+    {
+      "id": "spatial-leakage",
+      "how": "Random folds gave an AUC of {{cv.hgb.random.auc.mean:.3f}}; blocks sized from the autocorrelation range gave {{cv.hgb.block100.auc.mean:.3f}}. The headline figure is AUC against block size."
+    },
+    {
+      "id": "batch-effects",
+      "how": "Three analytical method families with different element suites; leave-one-family-out AUC is {{batch.hgb.lofo.auc:.3f}}, and the family is a learnable covariate."
+    },
+    {
+      "id": "censoring",
+      "how": "NURE codes non-detects by a sign convention; censored fractions were reported per element and family, and elements above the pre-registered fraction were dropped rather than filled."
+    },
+    {
+      "id": "join-fanout",
+      "how": "MRDS has duplicate and near-duplicate sites; the deposit-to-cell join is checked so a planted duplicate cannot create two positives."
+    }
   ],
   "figures": [
-    {"path": "reports/figures/fig4_auc_vs_block_size.png", "caption": "AUC and average precision of held-out cells against spatial block size, with the random-fold value as a reference line and the spread across repeated allocations shaded."},
-    {"path": "reports/figures/fig3_moran.png", "caption": "Moran's I of the producer label against distance, which set the reference block size."},
-    {"path": "reports/figures/fig5_capture.png", "caption": "Capture curves: the share of held-out producer cells inside the top-ranked fraction of area."},
-    {"path": "reports/figures/fig7_prospectivity_map.png", "caption": "Held-out predicted probability across Nevada with known producers overlaid."},
-    {"path": "reports/figures/fig2_censoring.png", "caption": "Censored fraction by element and analytical method family; the pathfinder elements fail the consistency rule."},
-    {"path": "reports/figures/fig1_coverage.png", "caption": "NURE sample coverage and MRDS gold producer sites."}
+    {
+      "path": "reports/figures/fig4_auc_vs_block_size.png",
+      "caption": "AUC and average precision of held-out cells against spatial block size, with the random-fold value as a reference line and the spread across repeated allocations shaded."
+    },
+    {
+      "path": "reports/figures/fig3_moran.png",
+      "caption": "Moran's I of the producer label against distance, which set the reference block size."
+    },
+    {
+      "path": "reports/figures/fig5_capture.png",
+      "caption": "Capture curves: the share of held-out producer cells inside the top-ranked fraction of area."
+    },
+    {
+      "path": "reports/figures/fig7_prospectivity_map.png",
+      "caption": "Held-out predicted probability across Nevada with known producers overlaid."
+    },
+    {
+      "path": "reports/figures/fig2_censoring.png",
+      "caption": "Censored fraction by element and analytical method family; the pathfinder elements fail the consistency rule."
+    },
+    {
+      "path": "reports/figures/fig1_coverage.png",
+      "caption": "NURE sample coverage and MRDS gold producer sites."
+    }
   ],
   "not_claimed": [
     "No exploration recommendation; the signal is lithological, not a pathfinder signature.",
@@ -38,13 +102,43 @@
     "No statement about gold prospectivity outside the sampled method families and element suite."
   ],
   "documents": [
-    {"title": "Five-minute walkthrough", "path": "docs/walkthrough.md"},
-    {"title": "Pre-registration (frozen before fitting)", "path": "docs/prereg.md"},
-    {"title": "Decisions log", "path": "docs/decisions.md"},
-    {"title": "How this becomes a cairn trap task", "path": "docs/cairn_trap_task.md"}
+    {
+      "title": "Five-minute walkthrough",
+      "path": "docs/walkthrough.md"
+    },
+    {
+      "title": "Pre-registration (frozen before fitting)",
+      "path": "docs/prereg.md"
+    },
+    {
+      "title": "Decisions log",
+      "path": "docs/decisions.md"
+    },
+    {
+      "title": "How this becomes a cairn trap task",
+      "path": "docs/cairn_trap_task.md"
+    }
   ],
-  "verification": {"frozen": ".cairn/frozen.json", "tests": "tests.n_passed", "harness": "cairn", "verify": "pass"},
-  "data": ["USGS NURE HSSR stream-sediment database, Nevada extract", "USGS Mineral Resources Data System, gold Producer and Past Producer sites"],
-  "stack": ["log-ratio features", "logistic regression", "gradient boosting", "spatial block CV", "Moran's I", "capture curves", "cairn ledger"],
-  "links": {"Repository": "https://github.com/ethannol/mineral-prospectivity"}
+  "verification": {
+    "frozen": ".cairn/frozen.json",
+    "tests": "tests.n_passed",
+    "harness": "cairn",
+    "verify": "pass"
+  },
+  "data": [
+    "USGS NURE HSSR stream-sediment database, Nevada extract",
+    "USGS Mineral Resources Data System, gold Producer and Past Producer sites"
+  ],
+  "stack": [
+    "log-ratio features",
+    "logistic regression",
+    "gradient boosting",
+    "spatial block CV",
+    "Moran's I",
+    "capture curves",
+    "cairn ledger"
+  ],
+  "links": {
+    "Repository": "https://github.com/ethannol/mineral-prospectivity"
+  }
 }
