@@ -5,9 +5,7 @@ The frozen block-CV results and preregistration remain unchanged. Different bloc
 Run on the analysis machine:
 
 ```sh
-uv run python scripts/10_prepare.py
-uv run python scripts/20_features.py
-uv run python scripts/30_labels.py
+uv run python exploratory/prepare_inputs.py
 uv run python exploratory/buffered_cv.py --reps 3 --buffers-km 0 5 10 25
 ```
 
@@ -16,3 +14,5 @@ This uses the baseline 100 km block allocation and both baseline model grids. Ea
 Outputs live separately in `reports/exploratory/buffered_cv/`: per-fold training attrition, cell predictions, repetition-level metrics, and source-revision metadata. Buffer sizes and three repetitions are exploratory choices, not a replacement decision rule or confidence interval. Interpretation must consider loss of training support as well as leakage.
 
 [Recorded supplementary results](buffered-results.md). Regenerate its table with `uv run python exploratory/render_buffered.py`; no models are fitted by that command.
+
+Preparation always overrides `CAIRN_LEDGER` and `CAIRN_CHECKS` into `reports/exploratory/preparation/`, even if the caller environment points at primary artifacts. Do not call the numbered preparation scripts directly for this sensitivity.

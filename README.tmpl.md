@@ -31,13 +31,12 @@ is cairn commit `a184e0732989373856039dea2919ccd96a88e8b1`. Install it in a
 dedicated sibling without changing an existing cairn checkout:
 
 ```bash
-git clone https://github.com/ethannol/cairn.git ../cairn-mineral-baseline
-git -C ../cairn-mineral-baseline checkout --detach a184e0732989373856039dea2919ccd96a88e8b1
-uv sync
+python3 scripts/bootstrap.py
 ```
 
-The path dependency points to this dedicated checkout. If it already exists,
-verify its HEAD matches the hash above before syncing; do not reset a shared
+This stdlib helper clones the pinned SDK into its dedicated folder and runs
+`uv sync --locked --group dev`. It refuses an existing checkout with a different
+HEAD or any uncommitted changes, and never resets or checks out an existing
 working tree. The project lockfile pins the remaining packages.
 
 ## Commands
