@@ -3,6 +3,7 @@
   "title": "Mineral Prospectivity",
   "kind": "study",
   "status": "complete",
+  "story": "docs/story.md",
   "question": "Given regional stream-sediment geochemistry, how well can known gold producers in Nevada be predicted, and how much of that skill is spatial leakage?",
   "one_liner": "USGS NURE stream-sediment chemistry and MRDS gold producers on a 5 km grid, two models, and the same evaluation run under random folds, spatial blocks of five sizes, and leave-one-laboratory-out.",
   "aim": "Measure how much of a prospectivity model's apparent skill at distinguishing grid cells containing known gold producers, from NURE stream-sediment geochemistry over Nevada, survives cross-validation that respects spatial autocorrelation and analytical batch.",
