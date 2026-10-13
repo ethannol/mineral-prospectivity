@@ -18,7 +18,25 @@
       "Leave-one-laboratory-out validation",
       "Capture curves and calibration"
     ],
-    "result": "Most of the accuracy disappears under spatial validation, and what remains tracks rock type rather than mineralisation. By the rule set in advance, no demonstrated skill."
+    "result": "Most of the accuracy disappears under spatial validation, and what remains tracks rock type rather than mineralisation. By the rule set in advance, no demonstrated skill.",
+    "pitfalls": [
+      {
+        "id": "spatial-leakage",
+        "text": "Random folds gave an AUC of {{cv.hgb.random.auc.mean:.2f}}; {{moran.reference_block_km:.0f}} km spatial blocks gave {{cv.hgb.block100.auc.mean:.2f}}"
+      },
+      {
+        "id": "batch-effects",
+        "text": "Holding out one laboratory method family at a time gave an AUC of {{batch.hgb.lofo.auc:.2f}}, below chance"
+      },
+      {
+        "id": "censoring",
+        "text": "The gold pathfinder elements were censored or absent in at least one laboratory family and had to be excluded before fitting"
+      },
+      {
+        "id": "join-fanout",
+        "text": "Duplicate deposit records in MRDS; the deposit-to-cell join is checked so one site cannot become two positives"
+      }
+    ]
   },
   "ledger": {
     "type": "cairn",
