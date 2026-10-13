@@ -8,6 +8,18 @@
   "aim": "Measure how much of a prospectivity model's apparent skill at distinguishing grid cells containing known gold producers, from NURE stream-sediment geochemistry over Nevada, survives cross-validation that respects spatial autocorrelation and analytical batch.",
   "hypothesis": "Random k-fold cross-validation overstates skill because neighbouring cells share geology. Pre-registered rule: leakage is substantial if random-fold AUC exceeds block-fold AUC at the reference block size by at least 0.05 with non-overlapping ranges; the model has skill only if block-fold AUC is at least 0.60 and its minimum over repetitions exceeds 0.55.",
   "conclusion": "Leakage is substantial by the frozen rule. The spatial model does not meet the pre-registered useful-skill threshold; this is not a test that its AUC equals chance. Holding out method families produces distribution shift associated with both analytical family and region, which are confounded. No exploration recommendation follows.",
+  "summary": {
+    "question": "Can stream-sediment chemistry predict where gold mines are, and how much of the apparent accuracy is the model memorising geography?",
+    "techniques": [
+      "Compositional log-ratio features",
+      "Logistic regression and gradient boosting",
+      "Spatial block cross-validation",
+      "Moran's I to choose the block size",
+      "Leave-one-laboratory-out validation",
+      "Capture curves and calibration"
+    ],
+    "result": "Most of the accuracy disappears under spatial validation, and what remains tracks rock type rather than mineralisation. By the rule set in advance, no demonstrated skill."
+  },
   "ledger": {
     "type": "cairn",
     "path": "artifacts/numbers.json"
