@@ -1,16 +1,31 @@
 # Mineral Prospectivity: how much of a model's skill is spatial leakage?
 
-_Rendered from `README.tmpl.md` by `scripts/90_render_docs.py`; every number is a ledger value. Edit the template, not this file._
+Can stream-sediment chemistry distinguish areas containing known gold producers in
+Nevada, and how much does the answer depend on the way the model is evaluated?
 
-**Question.** Given USGS NURE stream-sediment geochemistry over Nevada aggregated to {{features.cell_km:g}} km cells, how well can cells containing a known gold producer (MRDS Producer or Past Producer with gold as a primary commodity) be predicted, and how much of that apparent skill disappears when cross-validation respects spatial structure?
+## What the analysis shows
 
-**Answer.** Most of it. The gradient boosted model's AUC is {{cv.hgb.random.auc.mean:.3f}} under random {{cv.k_outer}}-fold CV (range {{cv.hgb.random.auc.min:.3f}} to {{cv.hgb.random.auc.max:.3f}} over {{cv.n_repetitions}} repetitions) and {{cv.hgb.ref.auc.mean:.3f}} under {{headline.reference_block_km:g}} km spatial block CV (range {{cv.hgb.ref.auc.min:.3f}} to {{cv.hgb.ref.auc.max:.3f}}), the block size the pre-registered autocorrelation rule selected. Average precision falls from {{cv.hgb.random.ap.mean:.3f}} to {{cv.hgb.ref.ap.mean:.3f}} against a base rate of {{cv.base_rate_pct:.1f}} percent. Under the frozen decision rule the leakage is "{{headline.hgb.leakage_label}}" and at the reference block size the frozen label is "{{headline.hgb.skill_label}}": the model fails the useful-skill threshold, not a statistical test of equality to chance. Leaving out an entire analytical laboratory family is worse still (AUC {{batch.hgb.lofo.auc:.3f}}), and adding the family as a covariate raises random-CV AUC by {{explore.labcov.hgb.random_gain:.3f}}: the model can learn the lab. The elements that carry what signal there is ({{explore.contrast_most_enriched}} up; {{explore.contrast_most_depleted}} down) describe lithology, not ore.
+Predictive performance drops when nearby locations are kept together during
+validation. The model does not meet the useful-skill threshold set before fitting.
+Its remaining signal reflects rock type, and differences between laboratory methods
+and regions complicate transfer to new areas. This is a study of model evaluation;
+it does not identify exploration targets.
+
+The analysis combines geochemical feature preparation, spatial cross-validation,
+and checks for laboratory effects using public USGS data.
+
+[Read the report](reports/report.md) · [Five-minute walkthrough](docs/walkthrough.md) · [Reproduce the analysis](#setup)
 
 ![AUC and average precision against spatial block size](reports/figures/fig4_auc_vs_block_size.png)
 
 Full report: [`reports/report.md`](reports/report.md). Pre-registration (frozen before any model was fitted): [`docs/prereg.md`](docs/prereg.md). Decisions: [`docs/decisions.md`](docs/decisions.md). Five-minute walkthrough: [`docs/walkthrough.md`](docs/walkthrough.md).
 
-## Headline numbers
+## Model performance
+
+AUC measures how well a model ranks known-producer cells above other cells; a value
+of 0.5 is chance ranking. Average precision also depends on how common the labelled
+producer cells are. The ranges below describe repeated fold allocations.
+
 
 | | Boosted trees | Logistic regression |
 |---|---|---|
@@ -22,7 +37,15 @@ Full report: [`reports/report.md`](reports/report.md). Pre-registration (frozen 
 | Leave-one-method-family-out AUC | {{batch.hgb.lofo.auc:.3f}} | {{batch.lr.lofo.auc:.3f}} |
 | Leave-one-quadrangle-out AUC (pooled) | {{batch.hgb.loqo.auc:.3f}} | {{batch.lr.loqo.auc:.3f}} |
 
+<details>
+<summary>Interpretation and study population</summary>
+
+The gradient boosted model's AUC is {{cv.hgb.random.auc.mean:.3f}} under random {{cv.k_outer}}-fold CV (range {{cv.hgb.random.auc.min:.3f}} to {{cv.hgb.random.auc.max:.3f}} over {{cv.n_repetitions}} repetitions) and {{cv.hgb.ref.auc.mean:.3f}} under {{headline.reference_block_km:g}} km spatial block CV (range {{cv.hgb.ref.auc.min:.3f}} to {{cv.hgb.ref.auc.max:.3f}}), the block size the pre-registered autocorrelation rule selected. Average precision falls from {{cv.hgb.random.ap.mean:.3f}} to {{cv.hgb.ref.ap.mean:.3f}} against a base rate of {{cv.base_rate_pct:.1f}} percent. Under the frozen decision rule the leakage is "{{headline.hgb.leakage_label}}" and at the reference block size the frozen label is "{{headline.hgb.skill_label}}": the model fails the useful-skill threshold, not a statistical test of equality to chance. Leaving out an entire analytical laboratory family is worse still (AUC {{batch.hgb.lofo.auc:.3f}}), and adding the family as a covariate raises random-CV AUC by {{explore.labcov.hgb.random_gain:.3f}}: the model can learn the lab. The elements that carry what signal there is ({{explore.contrast_most_enriched}} up; {{explore.contrast_most_depleted}} down) describe lithology, not ore.
+
+
 Population: {{labels.n_cells}} cells, {{labels.n_positive_cells}} positive, from {{prep.n_samples}} stream-sediment samples and {{labels.n_positive_sites}} producer sites. Moran's I of the label is {{moran.i_bin1:.2f}} within {{moran.i_bin1_hi_km:g}} km and falls below {{moran.threshold:g}} beyond {{moran.range_km:g}} km.
+
+</details>
 
 ## Setup
 
@@ -94,3 +117,5 @@ tests/               pytest suite
 
 
 The frozen skill label is an operational decision rule, not a statistical test that AUC equals 0.5. The reference model does not meet the pre-registered useful-skill threshold. Family indicators are learnable proxies for both method and region; this dataset cannot isolate a causal laboratory effect. See [the supplementary distance-buffer sensitivity](docs/buffered-validation.md) for a stricter exploratory separation check.
+
+_Rendered from `README.tmpl.md` by `scripts/90_render_docs.py`; every number is a ledger value. Edit the template, not this file._
